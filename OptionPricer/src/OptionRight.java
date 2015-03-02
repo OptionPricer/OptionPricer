@@ -1,5 +1,6 @@
 /**
- * Created by Sky on 2015/3/2-002.
+ * @author Sky
+ * Enum for option right.
  */
 public enum  OptionRight {
     PUT,CALL;

@@ -1,10 +1,34 @@
 /**
- * Created by Sky on 2015/3/2-002.
+ * @author Sky
+ * An abstract class for algorithms to calculate the price of financial products.
  */
-public class Algorithm {
+public abstract class Algorithm {
+    /**
+     * Result of calculation.
+     */
     double[] results;
+    /**
+     * Constant. The number of dots used to construct the volatility smile.
+     */
     public final int NUMOFDOTS=11;
-    abstract public double[] computeOption(Product o);
-    abstract public double crunchPut(Product o);
-    abstract public double crunchCall(Product o);
+
+    /**
+     * An abstract method to calculate the price of a Product.
+     * @param p the Product object to be calculated.
+     * @return the result.
+     */
+    abstract public double[] computeOption(Product p);
+    /**
+     * An abstract method to calculate the price of a Product.
+     * @param p the Product object to be calculated.
+     * @return the result.
+     */
+    abstract public double crunchPut(Product p);
+
+    /**
+     * An abstract method to calculate the price of a Product.
+     * @param p the Product object to be calculated.
+     * @return the result.
+     */
+    abstract public double crunchCall(Product p);
 }

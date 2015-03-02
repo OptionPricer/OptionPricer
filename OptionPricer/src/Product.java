@@ -1,5 +1,6 @@
 /**
- * Created by Sky on 2015/3/2-002.
+ * @author Sky
+ * A class of general financial products
  */
 public class Product {
     private double strikeP;

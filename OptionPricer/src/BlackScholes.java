@@ -1,6 +1,7 @@
 /**
- * Created by Sky on 2015/3/2-002.
+ * @author Sky
+ * A class for calculation by Black-Scholes formula.
+ *
  */
-public class BlackScholes extends Algorithm{
-
+public abstract class BlackScholes extends Algorithm{
 }
