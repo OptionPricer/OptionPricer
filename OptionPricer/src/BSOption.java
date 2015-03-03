@@ -9,18 +9,40 @@ public class BSOption extends BlackScholes{
      * @param o the Option object to be calculated.
      * @return the result.
      */
-    @Override
     public double[] computeOption(Option o){
+        double[] prices;
+        prices=double[NUMOFDOTS];
+        if(o.getRight()==OptionRight.PUT){
+            for (int i = 0; i <NUMOFDOTS ; i++) {
+                // Some operation needed. Call crunchPut method for NUMOFDOTS times.
 
+            }
+        }
+        if(o.getRight()==OptionRight.CALL){
+            for (int i = 0; i <NUMOFDOTS ; i++) {
+                // Some operation needed. Call crunchCall method for NUMOFDOTS times.
+
+            }
+        }
+        return prices;
     };
+
+
     /**
      * A method to calculate the price of a put Option by Black-Scholes formula.
      * @param o the Option object to be calculated.
      * @return the result.
      */
-    @Override
-    private double crunchPut(Option o){
 
+    private double crunchPut(Option o){
+        double s0=o.getsNought();
+        double k=o.getStrikeP();
+        double t=o.getTerm()
+        double r=o.getRiskFreeRate();
+        double sigma=o.getVolatility()
+        double d1=(Math.log(s0/k)+(r+sigma*sigma/2)*(t/12))/(sigma*Math.sqrt(t/12));
+        double d2=d1-sigma*Math.sqrt(t/12);
+        return k*Math.exp(-r*t/12)*cdf(-d2)-s0*cdf(-d1);
     };
 
     /**
@@ -29,7 +51,14 @@ public class BSOption extends BlackScholes{
      * @return the result.
      */
     private double crunchCall(Option o){
-
+        double s0=o.getsNought();
+        double k=o.getStrikeP();
+        double t=o.getTerm()
+        double r=o.getRiskFreeRate();
+        double sigma=o.getVolatility()
+        double d1=(Math.log(s0/k)+(r+sigma*sigma/2)*(t/12))/(sigma*Math.sqrt(t/12));
+        double d2=d1-sigma*Math.sqrt(t/12);
+        return s0*cdf(d1)-k*Math.exp(-r*t/12)*cdf(d2);
     };
 
     /** Compute the cumulative (up to x) of the standard normal distribution.
@@ -38,7 +67,6 @@ public class BSOption extends BlackScholes{
      * @return the cumulative probability distribution for the given x.
      */
     private double cdf(double x){
-        final double PI = 3.141592653;
         final double GAMMA = 0.2316419;
         final double A1 = 0.319381530;
         final double A2 = -0.356563782;
@@ -52,8 +80,8 @@ public class BSOption extends BlackScholes{
         }
 
         double k = 1.0/(1.0 + GAMMA * x);
-        double oneOverSqrtTwoPI = 1.0 / Math.sqrt(2*PI);
-        double nPrime = (1.0/Math.sqrt(2*PI))*Math.exp((-0.5)*x*x);
+        double oneOverSqrtTwoPI = 1.0 / Math.sqrt(2*Math.PI);
+        double nPrime = (1.0/Math.sqrt(2*Math.PI))*Math.exp((-0.5)*x*x);
         double kSquared = k*k;
         double kFourth = kSquared * kSquared;
         double result = 1.0 -
