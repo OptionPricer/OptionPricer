@@ -11,24 +11,27 @@ public abstract class Algorithm {
      * Constant. The number of dots used to construct the volatility smile.
      */
     public final int NUMOFDOTS=11;
+    /**
+     * Constant. The interval of change in volatility in the graph.
+     */
+    public final double DELTA=0.1;
+    /**
+     * An abstract method to calculate the price of an Option.
+     * @param o the Option object to be calculated.
+     * @return the result.
+     */
+    abstract public double[] computeOption(Option o);
+    /**
+     * An abstract method to calculate the price of a put option.
+     * @param o the Option object to be calculated.
+     * @return the result.
+     */
+    abstract public double crunchPut(Option o);
 
     /**
-     * An abstract method to calculate the price of a Product.
-     * @param p the Product object to be calculated.
+     * An abstract method to calculate the price of a call option.
+     * @param o the Option object to be calculated.
      * @return the result.
      */
-    abstract public double[] computeOption(Product p);
-    /**
-     * An abstract method to calculate the price of a Product.
-     * @param p the Product object to be calculated.
-     * @return the result.
-     */
-    abstract public double crunchPut(Product p);
-
-    /**
-     * An abstract method to calculate the price of a Product.
-     * @param p the Product object to be calculated.
-     * @return the result.
-     */
-    abstract public double crunchCall(Product p);
+    abstract public double crunchCall(Option o);
 }

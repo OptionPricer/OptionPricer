@@ -9,19 +9,29 @@ public class BSOption extends BlackScholes{
      * @param o the Option object to be calculated.
      * @return the result.
      */
+    @Override
     public double[] computeOption(Option o){
-        double[] prices;
-        prices=double[NUMOFDOTS];
+        double[] prices=new double[NUMOFDOTS];
+        Option[] optForGraph=new Option[NUMOFDOTS];
+        for (int i = 0; i < (NUMOFDOTS+1)/2; i++) {
+            int deltaVolatility=(NUMOFDOTS+1)/2-i;
+            try {
+                optForGraph[i]=(Option) super.clone();
+                optForGraph[NUMOFDOTS-1-i]=(Option) super.clone();
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace();
+            }
+            optForGraph[i].setVolatility(o.getVolatility()*(1-deltaVolatility*DELTA);
+            optForGraph[i].setVolatility(o.getVolatility()*(1+deltaVolatility*DELTA);
+        }
         if(o.getRight()==OptionRight.PUT){
             for (int i = 0; i <NUMOFDOTS ; i++) {
-                // Some operation needed. Call crunchPut method for NUMOFDOTS times.
-
+                prices[i]=crunchPut(optForGraph[i]);
             }
         }
         if(o.getRight()==OptionRight.CALL){
             for (int i = 0; i <NUMOFDOTS ; i++) {
-                // Some operation needed. Call crunchCall method for NUMOFDOTS times.
-
+                prices[i]=crunchCall(optForGraph[i]);
             }
         }
         return prices;
@@ -91,4 +101,7 @@ public class BSOption extends BlackScholes{
         else
             return result;
     }
+
+
+
 }
