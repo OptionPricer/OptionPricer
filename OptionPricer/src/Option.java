@@ -2,7 +2,7 @@
  * @author Sky
  * A class for Option.
  */
-public class Option extends Product implements Cloneable {
+public class Option extends Product {
     private OptionRight right;
     private OptionStyle style;
 
@@ -22,11 +22,5 @@ public class Option extends Product implements Cloneable {
         this.style = style;
     }
 
-    @Override
-    public Option clone() throws CloneNotSupportedException {
-        Option newOpt = (Option) super.clone();
-        newOpt.setStyle(this.getStyle());
-        newOpt.setRight(this.getRight());
-        return newOpt;
-    }
+
 }

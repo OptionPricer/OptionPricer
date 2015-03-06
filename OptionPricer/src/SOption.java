@@ -27,38 +27,39 @@ public class SOption extends Simulation{
      */
     @Override
     public double crunchPut(Option o) {
-        double simulate(int numIntervals, int numTrials) {
-            int i, trialCount;
-            double deltaT = o.getTerm()/(double)numIntervals;
-            double trialRunningSum, trialAverage, trialPayoff;
-            double simulationRunningSum, simulationAveragePayoff;
-            double s ;
-            Random rand=new Random();
-            simulationRunningSum = 0.0;
-            for (trialCount = 1; trialCount <= numTrials; trialCount++) {
-                s = o.getsNought();
-                trialRunningSum = 0.0;
-                double nns = 0;
-                for (i = 0; i < numIntervals; i++) {
-                    // nns = rand.nextSobelNormal();
-                //    nns = rand.nextMoroNormal();
-                    nns=rand.nextGaussian(); //Not sure
-                    s = s*Math.exp((o.getRiskFreeRate()-o.getVolatility()*o.getVolatility()/2)*deltaT +
-                            o.getVolatility()*nns*Math.sqrt(deltaT));
-                    trialRunningSum += s;
-
-                }
-                trialAverage = trialRunningSum/numIntervals;
-                trialPayoff = Math.max(trialAverage - o.getStrikeP(), 0.0);
-                simulationRunningSum += trialPayoff;
-            }
-            simulationAveragePayoff = simulationRunningSum / numTrials;
-            double valueOfOption;
-            valueOfOption = simulationAveragePayoff * Math.exp(-o.getRiskFreeRate()*o.getTerm());
-            return valueOfOption;
-        }
+        return 0.0;
     }
 
+    // Not sure whether this method is for call or put.
+    double simulate(Option o) {
+        int i, trialCount;
+        double deltaT = o.getTerm()/(double)numIntervals;
+        double trialRunningSum, trialAverage, trialPayoff;
+        double simulationRunningSum, simulationAveragePayoff;
+        double s ;
+        Random rand=new Random();
+        simulationRunningSum = 0.0;
+        for (trialCount = 1; trialCount <= numTrials; trialCount++) {
+            s = o.getsNought();
+            trialRunningSum = 0.0;
+            double nns = 0;
+            for (i = 0; i < numIntervals; i++) {
+                // nns = rand.nextSobelNormal();
+                //    nns = rand.nextMoroNormal();
+                nns=rand.nextGaussian(); //Not sure
+                s = s*Math.exp((o.getRiskFreeRate()-o.getVolatility()*o.getVolatility()/2)*deltaT +
+                        o.getVolatility()*nns*Math.sqrt(deltaT));
+                trialRunningSum += s;
+            }
+            trialAverage = trialRunningSum/numIntervals;
+            trialPayoff = Math.max(trialAverage - o.getStrikeP(), 0.0);
+            simulationRunningSum += trialPayoff;
+        }
+        simulationAveragePayoff = simulationRunningSum / numTrials;
+        double valueOfOption;
+        valueOfOption = simulationAveragePayoff * Math.exp(-o.getRiskFreeRate()*o.getTerm());
+        return valueOfOption;
+    }
     /**
      * An abstract method to calculate the price of a call option.
      *
