@@ -95,7 +95,7 @@ public class finiteDifference {
             if(this.Option.type == "AC"){
                for(j=1;j<M;j++){
                 if(u[j-1] < j * deltaS - this.Option.getStrikePrice())
-                    f[N-i][j] = this.Option.getStrikePrice() - j * deltaS;
+                    f[N-i][j] = j * deltaS - this.Option.getStrikePrice();
                 else
                     f[N-i][j] = u[j-1];
                 } 
