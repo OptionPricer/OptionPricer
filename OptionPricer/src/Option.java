@@ -2,7 +2,7 @@
  * @author Sky
  * A class for Option.
  */
-public class Option extends Product{
+public class Option extends Product {
     private OptionRight right;
     private OptionStyle style;
 
@@ -21,4 +21,6 @@ public class Option extends Product{
     public void setStyle(OptionStyle style) {
         this.style = style;
     }
+
+
 }
