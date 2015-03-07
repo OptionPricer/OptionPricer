@@ -21,9 +21,12 @@ public class OPS {
      * A boolean value indicating whether the user would like to show the diagram.
      */
     static boolean showDiagram;
+
+    /**
+     * To create an option.
+     * This method is called when the OptionRight and OptionStyle is decided,i.e., the Call/Put button is clicked.
+     */
     public static void createOption(){
-        // To create an option.
-        // This method is called when the OptionRight and OptionStyle is decided,i.e., the Call/Put button is clicked.
         // It will call the constructor Option(OptionRight right, OptionStyle style).
         // then it will call showApplicableAlgs().
     }

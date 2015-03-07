@@ -116,11 +116,15 @@ public class BSOption extends BlackScholes{
 //        Option o1=new Option(50.0,50.0,0.1,0.4,5.0,OptionRight.CALL,OptionStyle.EUROPEAN);
 ////        System.out.println("EURO PUT, K=50,p=" + bso.crunchPut(o1));
 ////        System.out.println("EURO CALL, K=50,p="+bso.crunchCall(o1));
-//        Option o2=new Option(40.0,50.0,0.1,0.4,5.0,OptionRight.CALL,OptionStyle.EUROPEAN);
+//        Option o2=new Option(50.0,50.0,0.1,0.4,5.0,OptionRight.PUT,OptionStyle.EUROPEAN);
 ////        System.out.println("EURO PUT, K=40,p=" + bso.crunchPut(o2));
 ////        System.out.println("EURO CALL, K=40,p="+bso.crunchCall(o2));
 //        double prc[]=new double[11];
 //        prc=bso.computeOption(o1);
+//        for (int i = 0; i < 11 ; i++) {
+//            System.out.println(prc[i]);
+//        }
+//        prc=bso.computeOption(o2);
 //        for (int i = 0; i < 11 ; i++) {
 //            System.out.println(prc[i]);
 //        }

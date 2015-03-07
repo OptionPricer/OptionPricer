@@ -7,15 +7,29 @@ public class SOption extends Simulation{
     private int numIntervals;
     private int numTrials;
 
+    public int getNumIntervals() {
+        return numIntervals;
+    }
+
+    public void setNumIntervals(int numIntervals) {
+        this.numIntervals = numIntervals;
+    }
+
+    public int getNumTrials() {
+        return numTrials;
+    }
+
+    public void setNumTrials(int numTrials) {
+        this.numTrials = numTrials;
+    }
+
     /**
-     * An abstract method to calculate the price of an Option.
-     *
+     * An method to calculate the price of an Option using Simulation.
+     * This method will also calculate different option prices in response to the change of volatility.
      * @param o the Option object to be calculated.
-     * @return the result.
+     * @return the array of prices.
      */
     @Override
-
-
     public double[] computeOption(Option o){
         double[] prices=new double[NUMOFDOTS];
         double vBase=o.getVolatility();
@@ -86,8 +100,9 @@ public class SOption extends Simulation{
 
 
     /**
-     * An abstract method to calculate the price of a call option.
-     *
+     * A method to calculate the price of a put option using Simulation.
+     * This method is taken from the given C++ project, AmericanPutOption.
+     * Some adaptions are made to "translate" it into Java.
      * @param o the Option object to be calculated.
      * @return the result.
      */
@@ -125,50 +140,29 @@ public class SOption extends Simulation{
         return valueOfOption;
     }
 
-    public int getNumIntervals() {
-        return numIntervals;
-    }
-
-    public void setNumIntervals(int numIntervals) {
-        this.numIntervals = numIntervals;
-    }
-
-    public int getNumTrials() {
-        return numTrials;
-    }
-
-    public void setNumTrials(int numTrials) {
-        this.numTrials = numTrials;
-    }
-
-    /**************************************
-     * testing for Simulation algorithm.
-     * @param args
-     *************************************/
-    public static void main(String args[]){
-        SOption bso=new SOption();
-        bso.numIntervals=500;
-        bso.numTrials=100;
-        Option o1=new Option(50.0,50.0,0.1,0.4,5.0,OptionRight.CALL,OptionStyle.ASIAN);
-//        System.out.println(bso.crunchCall(o1));
-//        System.out.println(bso.crunchPut(o1));
-        Option o2=new Option(40.0,50.0,0.1,0.4,5.0,OptionRight.CALL,OptionStyle.ASIAN);
-//        System.out.println(bso.crunchCall(o2));
-//        System.out.println(bso.crunchPut(o2));
-        for (int i = 0; i < 11 ; i++) {
-            System.out.println(bso.computeOption(o1)[i]);
-        }
-        System.out.println("--------------------");
-
-        for (int i = 0; i < 11 ; i++) {
-            System.out.println(bso.computeOption(o2)[i]);
-        }
 
 
-//        double prc[]=new double[11];
-//        prc=bso.computeOption(o1);
+//    /**************************************
+//     * testing for Simulation algorithm.
+//     * @param args
+//     *************************************/
+//    public static void main(String args[]){
+//        SOption bso=new SOption();
+//        bso.numIntervals=500;
+//        bso.numTrials=100;
+//        Option o1=new Option(50.0,50.0,0.1,0.4,5.0,OptionRight.CALL,OptionStyle.ASIAN);
+////        System.out.println(bso.crunchCall(o1));
+////        System.out.println(bso.crunchPut(o1));
+//        Option o2=new Option(40.0,50.0,0.1,0.4,5.0,OptionRight.CALL,OptionStyle.ASIAN);
+////        System.out.println(bso.crunchCall(o2));
+////        System.out.println(bso.crunchPut(o2));
 //        for (int i = 0; i < 11 ; i++) {
-//            System.out.println(prc[i]);
+//            System.out.println(bso.computeOption(o1)[i]);
 //        }
-    }
+//        System.out.println("--------------------");
+//
+//        for (int i = 0; i < 11 ; i++) {
+//            System.out.println(bso.computeOption(o2)[i]);
+//        }
+//    }
 }
