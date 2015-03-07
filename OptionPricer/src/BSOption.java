@@ -5,9 +5,11 @@
  * Note: Black-Scholes is applicable for European call & put option and American call option.
  */
 public class BSOption extends BlackScholes{
+    /**
+     * Constructor.
+     */
     public BSOption() {
     }
-
 
     /**
      * A method to calculate the price of an Option by Black-Scholes formula.
@@ -23,9 +25,9 @@ public class BSOption extends BlackScholes{
         if(o.getRight()==OptionRight.PUT){
             prices[count]=crunchPut(o); // Middle point should be the "original" option.
             for (int i = count ; i >0 ; i--) {
-                o.setVolatility(vBase*(1-i*DELTA));
+                o.setVolatility(vBase*(1-i* VOLINTERVAL));
                 prices[count-i]=crunchPut(o);
-                o.setVolatility(vBase*(1+i*DELTA));
+                o.setVolatility(vBase*(1+i* VOLINTERVAL));
                 prices[count+i]=crunchPut(o);
             }
         }
@@ -33,9 +35,9 @@ public class BSOption extends BlackScholes{
         if(o.getRight()==OptionRight.CALL){
             prices[count]=crunchCall(o); // Middle point should be the "original" option.
             for (int i = count ; i >0 ; i--) {
-                o.setVolatility(vBase*(1-i*DELTA));
+                o.setVolatility(vBase*(1-i* VOLINTERVAL));
                 prices[count-i]=crunchCall(o);
-                o.setVolatility(vBase*(1+i*DELTA));
+                o.setVolatility(vBase*(1+i* VOLINTERVAL));
                 prices[count+i]=crunchCall(o);
             }
         }
@@ -116,7 +118,7 @@ public class BSOption extends BlackScholes{
 //        Option o1=new Option(50.0,50.0,0.1,0.4,5.0,OptionRight.CALL,OptionStyle.EUROPEAN);
 ////        System.out.println("EURO PUT, K=50,p=" + bso.crunchPut(o1));
 ////        System.out.println("EURO CALL, K=50,p="+bso.crunchCall(o1));
-//        Option o2=new Option(40.0,50.0,0.1,0.4,5.0,OptionRight.CALL,OptionStyle.EUROPEAN);
+//        Option o2=new Option(50.0,50.0,0.1,0.4,5.0,OptionRight.PUT,OptionStyle.EUROPEAN);
 ////        System.out.println("EURO PUT, K=40,p=" + bso.crunchPut(o2));
 ////        System.out.println("EURO CALL, K=40,p="+bso.crunchCall(o2));
 //        double prc[]=new double[11];
@@ -124,7 +126,10 @@ public class BSOption extends BlackScholes{
 //        for (int i = 0; i < 11 ; i++) {
 //            System.out.println(prc[i]);
 //        }
+//        prc=bso.computeOption(o2);
+//        for (int i = 0; i < 11 ; i++) {
+//            System.out.println(prc[i]);
+//        }
 //    }
-
 
 }

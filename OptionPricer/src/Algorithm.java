@@ -14,7 +14,7 @@ public abstract class Algorithm {
     /**
      * Constant. The interval of change in volatility in the graph.
      */
-    public final double DELTA=0.1;
+    public final double VOLINTERVAL =0.1;
     /**
      * An abstract method to calculate the price of an Option.
      * @param o the Option object to be calculated.
