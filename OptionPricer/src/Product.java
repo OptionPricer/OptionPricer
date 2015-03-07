@@ -3,11 +3,23 @@
  * A class of general financial products
  */
 public class Product {
+
     private double strikeP;
     private double sNought;
     private double riskFreeRate;
     private double volatility;
     private double term;
+
+    public Product() {
+    }
+
+    public Product(double strikeP, double sNought, double riskFreeRate, double volatility, double term) {
+        this.strikeP = strikeP;
+        this.sNought = sNought;
+        this.riskFreeRate = riskFreeRate;
+        this.volatility = volatility;
+        this.term = term;
+    }
 
     public double getStrikeP() {
         return strikeP;
