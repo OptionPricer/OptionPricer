@@ -22,5 +22,17 @@ public class Option extends Product {
         this.style = style;
     }
 
+    public Option(){}
 
+    public Option(OptionRight right, OptionStyle style) {
+        super();
+        this.right = right;
+        this.style = style;
+    }
+
+    public Option(double strikeP, double sNought, double riskFreeRate, double volatility, double term, OptionRight right, OptionStyle style) {
+        super(strikeP, sNought, riskFreeRate, volatility, term);
+        this.right = right;
+        this.style = style;
+    }
 }

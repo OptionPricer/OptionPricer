@@ -1,4 +1,4 @@
-package view;
+//package view;
 
 import java.awt.Container;
 import java.awt.FlowLayout;
@@ -150,9 +150,9 @@ public class MainFrame extends JFrame{
 //         
     }
     
-    public static void main(String[] args){
-        new MainFrame().setVisible(true);
-    }
+//    public static void main(String[] args){
+//        new MainFrame().setVisible(true);
+//    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

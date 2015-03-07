@@ -3,13 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
 
-import java.awt.Color;
-import java.awt.Container;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.WindowConstants;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  *
@@ -18,10 +14,10 @@ import javax.swing.WindowConstants;
  * @version 1.0.0
  */
 public class OptionPanel extends JPanel{
-    
+
     public OptionPanel(){
-        selectPanel = new javax.swing.JPanel();
-        backgroundPanel = new javax.swing.JPanel();
+        selectPanel = new JPanel();
+        backgroundPanel = new JPanel();
         infoLabel = new javax.swing.JLabel();
         EuropeanRadioButton = new javax.swing.JRadioButton();
         AmericanRadioButton = new javax.swing.JRadioButton();
@@ -31,7 +27,7 @@ public class OptionPanel extends JPanel{
 
         //setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        selectPanel.setBackground(new java.awt.Color(150, 0, 0));
+        selectPanel.setBackground(new Color(150, 0, 0));
         backgroundPanel.setBackground(Color.white);
 
         infoLabel.setText("Please choose an option you want:");
@@ -88,10 +84,10 @@ public class OptionPanel extends JPanel{
                     .addComponent(putButton))
                 .addGap(60, 60, 60))
         );
-               
+
         javax.swing.GroupLayout backgroundPanelLayout = new javax.swing.GroupLayout(backgroundPanel);
         backgroundPanel.setLayout(backgroundPanelLayout);
-        // Modifier: for the gap between selectPanel and backgroundPanel 
+        // Modifier: for the gap between selectPanel and backgroundPanel
         backgroundPanelLayout.setHorizontalGroup(
             backgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundPanelLayout.createSequentialGroup()
@@ -106,19 +102,19 @@ public class OptionPanel extends JPanel{
                 .addComponent(selectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(50, Short.MAX_VALUE))
         );
-               
+
         add(selectPanel, "center");
         add(backgroundPanel, "center");
     }
-    
+
 //    public static JPanel testJP(){
 //        JPanel t = new JPanel();
 //        t.setSize(300,300);
 //        t.setBackground(Color.BLUE);
-//        
+//
 //        return t;
 //    }
-    
+
 //     public static void main(String[] args){
 //        JFrame a = new JFrame();
 //        a.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -133,8 +129,8 @@ public class OptionPanel extends JPanel{
 //        //a.add(op);
 //        a.setContentPane(op);
 //    }
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton AmericanRadioButton;
     private javax.swing.JRadioButton AsianRadioButton;
@@ -142,7 +138,7 @@ public class OptionPanel extends JPanel{
     private javax.swing.JButton callButton;
     private javax.swing.JLabel infoLabel;
     private javax.swing.JButton putButton;
-    public javax.swing.JPanel selectPanel;
-    private javax.swing.JPanel backgroundPanel;
+    public JPanel selectPanel;
+    private JPanel backgroundPanel;
     // End of variables declaration//GEN-END:variables
 }

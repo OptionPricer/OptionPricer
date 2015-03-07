@@ -34,4 +34,5 @@ public abstract class Algorithm {
      * @return the result.
      */
     abstract public double crunchCall(Option o);
+
 }

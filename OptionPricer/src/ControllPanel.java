@@ -1,4 +1,4 @@
-package view;
+//package view;
 
 import java.awt.Component;
 import java.awt.Container;
