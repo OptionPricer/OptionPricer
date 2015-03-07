@@ -7,6 +7,7 @@ public class SOption extends Simulation{
     private int numIntervals;
     private int numTrials;
 
+
     public int getNumIntervals() {
         return numIntervals;
     }
@@ -24,6 +25,11 @@ public class SOption extends Simulation{
     }
 
     /**
+     * Constructor.
+     */
+    public SOption(){};
+
+    /**
      * An method to calculate the price of an Option using Simulation.
      * This method will also calculate different option prices in response to the change of volatility.
      * @param o the Option object to be calculated.
@@ -38,9 +44,9 @@ public class SOption extends Simulation{
         if(o.getRight()==OptionRight.PUT){
             prices[count]=crunchPut(o); // Middle point should be the "original" option.
             for (int i = count ; i >0 ; i--) {
-                o.setVolatility(vBase*(1-i*DELTA));
+                o.setVolatility(vBase*(1-i* VOLINTERVAL));
                 prices[count-i]=crunchPut(o);
-                o.setVolatility(vBase*(1+i*DELTA));
+                o.setVolatility(vBase*(1+i* VOLINTERVAL));
                 prices[count+i]=crunchPut(o);
             }
         }
@@ -48,9 +54,9 @@ public class SOption extends Simulation{
         if(o.getRight()==OptionRight.CALL){
             prices[count]=crunchCall(o); // Middle point should be the "original" option.
             for (int i = count ; i >0 ; i--) {
-                o.setVolatility(vBase*(1-i*DELTA));
+                o.setVolatility(vBase*(1-i* VOLINTERVAL));
                 prices[count-i]=crunchCall(o);
-                o.setVolatility(vBase*(1+i*DELTA));
+                o.setVolatility(vBase*(1+i* VOLINTERVAL));
                 prices[count+i]=crunchCall(o);
             }
         }

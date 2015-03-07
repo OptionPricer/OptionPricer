@@ -5,9 +5,11 @@
  * Note: Black-Scholes is applicable for European call & put option and American call option.
  */
 public class BSOption extends BlackScholes{
+    /**
+     * Constructor.
+     */
     public BSOption() {
     }
-
 
     /**
      * A method to calculate the price of an Option by Black-Scholes formula.
@@ -23,9 +25,9 @@ public class BSOption extends BlackScholes{
         if(o.getRight()==OptionRight.PUT){
             prices[count]=crunchPut(o); // Middle point should be the "original" option.
             for (int i = count ; i >0 ; i--) {
-                o.setVolatility(vBase*(1-i*DELTA));
+                o.setVolatility(vBase*(1-i* VOLINTERVAL));
                 prices[count-i]=crunchPut(o);
-                o.setVolatility(vBase*(1+i*DELTA));
+                o.setVolatility(vBase*(1+i* VOLINTERVAL));
                 prices[count+i]=crunchPut(o);
             }
         }
@@ -33,9 +35,9 @@ public class BSOption extends BlackScholes{
         if(o.getRight()==OptionRight.CALL){
             prices[count]=crunchCall(o); // Middle point should be the "original" option.
             for (int i = count ; i >0 ; i--) {
-                o.setVolatility(vBase*(1-i*DELTA));
+                o.setVolatility(vBase*(1-i* VOLINTERVAL));
                 prices[count-i]=crunchCall(o);
-                o.setVolatility(vBase*(1+i*DELTA));
+                o.setVolatility(vBase*(1+i* VOLINTERVAL));
                 prices[count+i]=crunchCall(o);
             }
         }
@@ -129,6 +131,5 @@ public class BSOption extends BlackScholes{
 //            System.out.println(prc[i]);
 //        }
 //    }
-
 
 }
