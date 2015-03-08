@@ -3,15 +3,15 @@ import java.util.*;
  *
  * @author catherine_Liu
  */
-public class fdOption extends FiniteDifference{   
+public class FiniteDifference extends Algorithm{   
     int numOfTimeInterval;
     int numOfPriceInterval;
     double sMax;
         
-    fdOption(){
+    FiniteDifference(){
        
     }
-    fdOption(int N, int M, double sMax){
+    FiniteDifference(int N, int M, double sMax){
         this.numOfTimeInterval = N;
         this.numOfPriceInterval = M;
         this.sMax = sMax;
