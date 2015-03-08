@@ -26,6 +26,7 @@ public class SimulationModel extends Algorithm{
         this.numTrials = numTrials;
     }
 
+
     /**
      * Constructor.
      */
@@ -81,6 +82,7 @@ public class SimulationModel extends Algorithm{
         double s ;
         Random rand=new Random();
         simulationRunningSum = 0.0;
+        trialAverage=0.0;
         for (trialCount = 1; trialCount <= numTrials; trialCount++) {
             s = o.getsNought();
             trialRunningSum = 0.0;
@@ -93,7 +95,20 @@ public class SimulationModel extends Algorithm{
                         o.getVolatility()*nns*Math.sqrt(deltaT));
                 trialRunningSum += s;
             }
-            trialAverage = trialRunningSum/numIntervals;
+            switch (o.getStyle()){
+                case ASIAN:
+                {
+                    trialAverage = trialRunningSum/numIntervals;
+                    break;
+                }
+                case EUROPEAN:
+                {}
+                case AMERICAN:{
+                    trialAverage = s;
+                    break;
+                }
+            }
+//            trialAverage = trialRunningSum/numIntervals;
             /*************************************
              * The only difference between calculating call and put option in simulation.
              ***************************************/
@@ -158,7 +173,7 @@ public class SimulationModel extends Algorithm{
 //        model.SimulationModel bso=new model.SimulationModel();
 //        bso.numIntervals=500;
 //        bso.numTrials=1000;
-//        model.Option o1=new model.Option(50.0,50.0,0.1,0.4,5.0/12,model.OptionRight.CALL,model.OptionStyle.ASIAN);
+//        model.Option o1=new model.Option(50.0,50.0,0.1,0.4,5.0/12,model.OptionRight.CALL, OptionStyle.EUROPEAN);
 //        System.out.println("ASIAN CALL,50, P="+bso.crunchCall(o1));
 //        System.out.println("ASIAN PUT,50, P="+bso.crunchPut(o1));
 //        model.Option o2=new model.Option(40.0,50.0,0.1,0.4,5.0/12,model.OptionRight.CALL,model.OptionStyle.ASIAN);
