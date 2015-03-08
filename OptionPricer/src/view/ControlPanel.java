@@ -24,9 +24,9 @@ import model.OptionStyle;
  * @since 2015.03.07
  * @version 1.0.0
  */
-public class ControllPanel extends JPanel implements ActionListener{
+public class ControlPanel extends JPanel implements ActionListener{
     
-    public ControllPanel(JFrame jf){
+    public ControlPanel(JFrame jf){
         mainframe = jf;
         tempcp  = this;
         
@@ -85,41 +85,7 @@ public class ControllPanel extends JPanel implements ActionListener{
         }
         algorithmsPanel.add(cusInfoLabel);        
         
-//        javax.swing.GroupLayout algorithmsPanelLayout = new javax.swing.GroupLayout(algorithmsPanel);
-//        algorithmsPanel.setLayout(algorithmsPanelLayout);
-//        algorithmsPanelLayout.setHorizontalGroup(
-//            algorithmsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//            .addGroup(algorithmsPanelLayout.createSequentialGroup()
-//                .addContainerGap()
-//                .addGroup(algorithmsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, algorithmsPanelLayout.createSequentialGroup()
-//                        .addGap(0, 0, Short.MAX_VALUE)
-//                        .addGroup(algorithmsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//                            .addComponent(algoInfoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-//                            .addComponent(btCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-//                            .addComponent(niCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-//                            .addComponent(sCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-//                    .addGroup(algorithmsPanelLayout.createSequentialGroup()
-//                        .addComponent(cusInfoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-//                        .addGap(0, 0, Short.MAX_VALUE)))
-//                .addContainerGap())
-//        );
-//        algorithmsPanelLayout.setVerticalGroup(
-//            algorithmsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, algorithmsPanelLayout.createSequentialGroup()
-//                .addContainerGap()
-//                .addComponent(algoInfoLabel)
-//                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-//                .addComponent(btCheckBox)
-//                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-//                .addComponent(niCheckBox)
-//                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-//                .addComponent(sCheckBox)
-//                .addGap(18, 18, 18)
-//                .addComponent(cusInfoLabel)
-//                .addContainerGap(77, Short.MAX_VALUE))
-//        );
-
+        
         //contruct the parametersPanel
         paraInfoLabel = new JLabel();
         paraInfoLabel.setText("Parameters:");
@@ -246,6 +212,7 @@ public class ControllPanel extends JPanel implements ActionListener{
     }
     
     public void actionPerformed(ActionEvent e){
+        OPS.showDiagram = false;        //initialization
         if(e.getActionCommand().equals("ADD")){
 //            OPS.theOption.setRight(OptionRight.PUT);
         }
@@ -269,16 +236,42 @@ public class ControllPanel extends JPanel implements ActionListener{
                 OPS.theOption.setRiskFreeRate(rtf);
                 OPS.theOption.setVolatility(otf);
                 
+                if(graphCheckBox.isSelected()){
+                    OPS.showDiagram = true;
+                }
+                
                 if(bsCheckBox.isSelected() || btCheckBox.isSelected() ||
                         niCheckBox.isSelected() || sCheckBox.isSelected()){ 
+                    OPS.algNames.clear();       //initialization
+                    if(bsCheckBox.isSelected()){
+                        OPS.algNames.add("BlackScholesModel");
+                    }
+                    if(btCheckBox.isSelected()){
+                        OPS.algNames.add("BinomialTree");
+                    }
+                    if(niCheckBox.isSelected()){
+                        OPS.algNames.add("FiniteDifference");
+                    }
+                    if(sCheckBox.isSelected()){
+                        OPS.algNames.add("SimulationModel");
+                    }
+
+                    /***********************
+                     ** for testing ********
+                     ***********************/
                     System.out.println(OPS.theOption.getStyle());
                     System.out.println(OPS.theOption.getRight());
                     System.out.print("s:" + OPS.theOption.getsNought() + ", ");
                     System.out.print("k:" + OPS.theOption.getStrikeP()+ ", ");
                     System.out.print("t:" + OPS.theOption.getTerm()+ ", ");
                     System.out.print("r:" + OPS.theOption.getRiskFreeRate()+ ", ");
-                    System.out.print("o:" + OPS.theOption.getVolatility());
+                    System.out.println("o:" + OPS.theOption.getVolatility());
+                    System.out.println(OPS.showDiagram);
+                    System.out.println(OPS.algNames);
                 }
+                OPS.compute();
+                System.out.println(OPS.results.size());
+                
                 new MainFrame("RESULT");   
                 mainframe.dispose();
             }
@@ -287,7 +280,7 @@ public class ControllPanel extends JPanel implements ActionListener{
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JFrame mainframe;
-    private ControllPanel tempcp;   //used for the button actionperformed    
+    private ControlPanel tempcp;   //used for the button actionperformed    
     private String bsf = "B-S Formula";
     private String bt = "Binomial Tree";
     private String ni = "Numerical Integration";

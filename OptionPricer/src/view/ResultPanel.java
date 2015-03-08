@@ -8,6 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+
+import controller.OPS;
 import model.Option;
 
 /**
@@ -25,18 +27,46 @@ public class ResultPanel extends JPanel{
         
         promptLabel.setText("The result is shown below:");
         
+//        resultTable.setModel(new javax.swing.table.DefaultTableModel(
+//            new Object [][] {
+//                {"Simulation", "50.00", "50.00", "5", "0.10", "0.40", "0.91"},
+//                {null, null, null, null, null, null, null},
+//                {null, null, null, null, null, null, null},
+//                {null, null, null, null, null, null, null}
+//            },
+//            new String [] {
+//                "Method", "S0", "K", "T", "r", "σ", "Price"
+//            }
+//        ));
+
         resultTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"Simulation", "50.00", "50.00", "5", "0.10", "0.40", "0.91"},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Method", "S0", "K", "T", "r", "σ", "Price"
-            }
+                new Object [][] {
+                        {null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null}
+                },
+                new String [] {
+                        "Method", "S0", "K", "T", "r", "σ", "Price"
+                }
         ));
-        
+        resultTable.setValueAt("Method",0,0);
+        resultTable.setValueAt("S0",0,1);
+        resultTable.setValueAt("K",0,2);
+        resultTable.setValueAt("T",0,3);
+        resultTable.setValueAt("r",0,4);
+        resultTable.setValueAt("σ",0,5);
+        resultTable.setValueAt("Price",0,6);
+
+        for (int i=1;i<=OPS.algList.size();i++) {
+            resultTable.setValueAt((String)OPS.algNames.get(i-1),i,0);
+            resultTable.setValueAt((double)OPS.theOption.getsNought(),i,1);
+            resultTable.setValueAt((double)OPS.theOption.getStrikeP(),i,2);
+            resultTable.setValueAt((double)OPS.theOption.getTerm(),i,3);
+            resultTable.setValueAt((double)OPS.theOption.getRiskFreeRate(),i,4);
+            resultTable.setValueAt((double)OPS.theOption.getVolatility(),i,5);
+            resultTable.setValueAt((double)OPS.results.get(i-1)[5],i,6);
+        }
         restartButton.setText("Restart");
         
         //to the left, 0 and 0 gap

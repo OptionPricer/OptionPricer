@@ -38,15 +38,13 @@ public class BinomialTree extends Algorithm {
          * @param option put or call option 
          * @param intervals use specified number of times price should be evaluated
          */
-        BinomialTree(Option option, int intervals){
+        public BinomialTree(Option option, int intervals){
             super();
             this.numIntervals = intervals;
             deltaT = option.getTerm() / numIntervals;
-            
-            
-            
-            
         }
+
+        public BinomialTree(){};
         @Override
         public double[] computeOption(Option option){
             System.out.println("Up prob: " + up);
@@ -122,7 +120,7 @@ public class BinomialTree extends Algorithm {
             }
             
             binomValue = binomialTree[0][0].optionPrice;
-            System.out.println("Option price for " + option.toString() );
+            System.out.println("Option price for " + option.getClass().getName() );
             System.out.println("value: " + binomValue);
             return binomValue;
         }

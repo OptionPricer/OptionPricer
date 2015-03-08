@@ -9,10 +9,10 @@ public class FiniteDifference extends Algorithm{
     int numOfPriceInterval;
     double sMax;
         
-    FiniteDifference(){
+    public FiniteDifference(){
        
     }
-    FiniteDifference(int N, int M, double sMax){
+    public FiniteDifference(int N, int M, double sMax){
         this.numOfTimeInterval = N;
         this.numOfPriceInterval = M;
         this.sMax = sMax;
@@ -171,7 +171,7 @@ public class FiniteDifference extends Algorithm{
         }        
         double optionValue;
         j = 0;
-        while(stockPrice[j] < o.getsNought())
+        while(stockPrice[j] < o.getsNought()) //
             j++;
         if(stockPrice[j] == o.getsNought())
             optionValue = f[0][j];
