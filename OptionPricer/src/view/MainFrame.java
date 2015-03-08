@@ -21,7 +21,8 @@ import model.Option;
  * @version 1.0.0
  * 
  */
-public class MainFrame extends JFrame{ 
+public class MainFrame extends JFrame{
+    private final String IMGPATH="../pictures/cmu_wordmark.jpg";
     public MainFrame(){
         setTitle("Option Pricer");
         this.setBackground(new java.awt.Color(150, 0, 0));
@@ -126,7 +127,7 @@ public class MainFrame extends JFrame{
         headPanel.setPreferredSize(new java.awt.Dimension(1000, 100));
 
         headLabel.setBackground(new java.awt.Color(150, 0, 0));
-        headLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/cmu_wordmark.jpg"))); // NOI18N
+//        headLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(IMGPATH))); // NOI18N
         headLabel.setMaximumSize(new java.awt.Dimension(150, 100));
         headLabel.setMinimumSize(new java.awt.Dimension(150, 100));
         headLabel.setPreferredSize(new java.awt.Dimension(150, 100));

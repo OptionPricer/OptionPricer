@@ -142,7 +142,7 @@ public class OptionPanel extends JPanel implements ActionListener{
         if(e.getActionCommand().equals("PUT")){
             right = OptionRight.PUT;   
             OPS.createOption(right, style);
-            OPS.createAlgorithm();
+            OPS.initAlgs();
             new MainFrame("CONTROL");   
             System.out.println(OPS.theOption.getStyle()); 
             System.out.println(OPS.theOption.getRight());  
@@ -151,6 +151,7 @@ public class OptionPanel extends JPanel implements ActionListener{
         else if(e.getActionCommand().equals("CALL")){
             right = OptionRight.CALL; 
             OPS.createOption(right, style);
+            OPS.initAlgs();
             new MainFrame("CONTROL");   
             mainframe.dispose();
         }

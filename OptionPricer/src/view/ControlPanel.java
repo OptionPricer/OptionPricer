@@ -255,7 +255,10 @@ public class ControlPanel extends JPanel implements ActionListener{
                     if(sCheckBox.isSelected()){
                         OPS.algNames.add("SimulationModel");
                     }
-                    
+
+                    /***********************
+                     ** for testing ********
+                     ***********************/
                     System.out.println(OPS.theOption.getStyle());
                     System.out.println(OPS.theOption.getRight());
                     System.out.print("s:" + OPS.theOption.getsNought() + ", ");
@@ -265,7 +268,9 @@ public class ControlPanel extends JPanel implements ActionListener{
                     System.out.println("o:" + OPS.theOption.getVolatility());
                     System.out.println(OPS.showDiagram);
                     System.out.println(OPS.algNames);
-                }                
+                }
+                OPS.compute();
+                System.out.println(OPS.results.size());
                 
                 new MainFrame("RESULT");   
                 mainframe.dispose();
