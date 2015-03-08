@@ -12,19 +12,19 @@ public class OPS {
     /**
      * An arraylist to store the algorithms chosen by the user.
      */
-    static ArrayList<Algorithm> algList;
+    public static ArrayList<Algorithm> algList;
     /**
      * An arraylist to store the calculation results.
      */
-    static ArrayList results;
+    public static ArrayList results;
     /**
      * The option object which is to be calculated
      */
-    static Option theOption;
+    public static Option theOption;
     /**
      * A boolean value indicating whether the user would like to show the diagram.
      */
-    static boolean showDiagram;
+    public static boolean showDiagram;
 
     /**
      * To create an option.
