@@ -1,16 +1,12 @@
 package view;
 
+import controller.OPS;
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
-import javax.swing.ButtonModel;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.WindowConstants;
-import model.Option;
 import model.OptionRight;
 import model.OptionStyle;
 
@@ -23,7 +19,6 @@ import model.OptionStyle;
 public class OptionPanel extends JPanel implements ActionListener{
     public OptionPanel(JFrame jf){
         mainframe = jf;
-        option = new Option();
         selectPanel = new javax.swing.JPanel();
         backgroundPanel = new javax.swing.JPanel();
         infoLabel = new javax.swing.JLabel();
@@ -131,45 +126,43 @@ public class OptionPanel extends JPanel implements ActionListener{
         EuropeanRadioButton.setSelected(true);
     }
       
-    public void actionPerformed(ActionEvent e){        
+    public void actionPerformed(ActionEvent e){    
+        OptionStyle style = null;
+        OptionRight right = null;       
         if(EuropeanRadioButton.isSelected()){
-            option.setStyle(OptionStyle.EUROPEAN);
+            style = OptionStyle.EUROPEAN;
         }
         else if(AmericanRadioButton.isSelected()){
-            option.setStyle(OptionStyle.AMERICAN);
+            style = OptionStyle.AMERICAN;
         }
         else if(AsianRadioButton.isSelected()){
-            option.setStyle(OptionStyle.ASIAN);
+            style = OptionStyle.ASIAN;
         }
         
         if(e.getActionCommand().equals("PUT")){
-            option.setRight(OptionRight.PUT);
-            new MainFrame("CONTROLL", option);   
-            System.out.println(option.getStyle()); 
-            System.out.println(option.getRight());  
+            right = OptionRight.PUT;   
+            OPS.createOption(right, style);
+            new MainFrame("CONTROLL");   
+            System.out.println(OPS.theOption.getStyle()); 
+            System.out.println(OPS.theOption.getRight());  
             mainframe.dispose();
         }
         else if(e.getActionCommand().equals("CALL")){
-            option.setRight(OptionRight.CALL);
-            new MainFrame("CONTROLL", option);   
-            System.out.println(option.getStyle()); 
-            System.out.println(option.getRight()); 
+            right = OptionRight.CALL; 
+            OPS.createOption(right, style);
+            new MainFrame("CONTROLL");   
+            System.out.println(OPS.theOption.getStyle()); 
+            System.out.println(OPS.theOption.getRight()); 
             mainframe.dispose();
         }
         
     }
     
-    public Option getOption(){
-        return option;
-    }
-    
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private JFrame mainframe;
-    private Option option;
-    private String erb = "European model.Option: ";
-    private String amrb = "American model.Option: ";
-    private String asrb = "Asian model.Option: ";
+    private JFrame mainframe;    
+    private String erb = "European Option: ";
+    private String amrb = "American Option: ";
+    private String asrb = "Asian Option: ";
     private String cb = "CALL";
     private String pb = "PUT";
     private javax.swing.JRadioButton AmericanRadioButton;

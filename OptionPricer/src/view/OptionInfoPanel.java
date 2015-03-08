@@ -23,7 +23,7 @@ public class OptionInfoPanel extends JPanel{
         this.setPreferredSize(new java.awt.Dimension(1000, 50));
         
         optionLabel = new JLabel();
-        optionLabel.setText("Text model.Option");
+        optionLabel.setText("Text Option");
         this.add(optionLabel);
     }
     
