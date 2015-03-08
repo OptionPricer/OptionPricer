@@ -1,11 +1,11 @@
-package optionpricer;
+package optionpricergit;
 import java.util.*;
 /**
  *
  * @author catherine_Liu
  */
 public class finiteDifference {
-    option Option;    
+    Option Option;    
     int numOfTimeInterval;
     int numOfPriceInterval;
     double sMax;
@@ -13,7 +13,7 @@ public class finiteDifference {
     finiteDifference(){
        
     }
-    finiteDifference(option givenOption,int N, int M, double sMax){
+    finiteDifference(Option givenOption,int N, int M, double sMax){
         Option = givenOption;
         this.numOfTimeInterval = N;
         this.numOfPriceInterval = M;
@@ -39,27 +39,31 @@ public class finiteDifference {
             stockPrice[j] = j * this.sMax / M;
         }
         //initial stock price at zero and sMax
-        if((this.Option.type == "AP")||(this.Option.type == "EP")){
-            for(i=0;i<=N;i++){
-                f[i][0] = this.Option.getStrikePrice();
-                f[i][M] = 0.0;
-            }
+        if((this.Option.getRight() == OptionRight.PUT)){        
+                for(i=0;i<=N;i++){
+                    f[i][0] = this.Option.getStrikeP();
+                    f[i][M] = 0.0;
+                }
+            
         }
-        if((this.Option.type == "AC")||(this.Option.type == "EC")){
-            for(i=0;i<=N;i++){
-            f[i][0] = 0.0;
-            f[i][M] = this.Option.getStrikePrice();
-            }
+        if((this.Option.getRight() == OptionRight.CALL)){         
+                for(i=0;i<=N;i++){
+                    f[i][0] = 0.0;
+                    f[i][M] = this.Option.getStrikeP();
+                }
         }
+            
+        
         //initialize option value at maturity
-        if((this.Option.type == "AP")||(this.Option.type == "EP")){
-            for(j=0;j<=M;j++){
-                f[N][j]=Math.max(this.Option.getStrikePrice()-stockPrice[j],0.0);
-            }
+        if(this.Option.getRight() == OptionRight.PUT){
+                for(j=0;j<=M;j++){
+                    f[N][j]=Math.max(this.Option.getStrikeP()-stockPrice[j],0.0);
+                }
+            
         }
-        if((this.Option.type == "AC")||(this.Option.type == "EC")){
+        if(this.Option.getRight() == OptionRight.CALL){
             for(j=0;j<=M;j++){
-                f[N][j]=Math.max(stockPrice[j]-this.Option.getStrikePrice(),0.0);
+                f[N][j]=Math.max(stockPrice[j]-this.Option.getStrikeP(),0.0);
             }
         }
         //Calculate interior values
@@ -84,43 +88,48 @@ public class finiteDifference {
             //Solve the tridiagonal system of equations.
             //The solutions ar placed in u.
             tridiag(a,b,c,r,u,M-1);
-            if(this.Option.type == "AP"){
+            if(this.Option.getRight() == OptionRight.PUT){
+            if(this.Option.getStyle() == OptionStyle.AMERICAN){
                 for(j=1;j<M;j++){
-                    if(u[j-1] < this.Option.getStrikePrice() - j * deltaS)
-                        f[N-i][j] = this.Option.getStrikePrice() - j * deltaS;
+                    if(u[j-1] < this.Option.getStrikeP() - j * deltaS)
+                        f[N-i][j] = this.Option.getStrikeP() - j * deltaS;
                     else
                         f[N-i][j] = u[j-1];
                 } 
             }
-            if(this.Option.type == "AC"){
+            if(this.Option.getStyle() == OptionStyle.EUROPEAN){
+                for(j=1;j<M;j++){
+                    f[N-i][j] = u[j-1];
+                }
+            }
+            }
+            if(this.Option.getRight() == OptionRight.CALL){
+            if(this.Option.getStyle() == OptionStyle.AMERICAN){
                for(j=1;j<M;j++){
-                if(u[j-1] < j * deltaS - this.Option.getStrikePrice())
-                    f[N-i][j] = j * deltaS - this.Option.getStrikePrice();
+                if(u[j-1] < j * deltaS - this.Option.getStrikeP())
+                    f[N-i][j] = j * deltaS - this.Option.getStrikeP();
                 else
                     f[N-i][j] = u[j-1];
                 } 
             }
-            if(this.Option.type == "EP"){
+            
+            if(this.Option.getStyle() == OptionStyle.EUROPEAN){
                 for(j=1;j<M;j++){
                     f[N-i][j] = u[j-1];
                 }
             }
-            if(this.Option.type == "EC"){
-                for(j=1;j<M;j++){
-                    f[N-i][j] = u[j-1];
-                }
             }
         }
         
         double optionValue;
         j = 0;
-        while(stockPrice[j] < this.Option.getsNaught())
+        while(stockPrice[j] < this.Option.getsNought())
             j++;
-        if(stockPrice[j] == this.Option.getsNaught())
+        if(stockPrice[j] == this.Option.getsNought())
             optionValue = f[0][j];
         else
             //linear interpolation; we can do better
-            optionValue = f[0][j-1] + (f[0][j] - f[0][j-1]) * (this.Option.getsNaught()-stockPrice[j-1])/(stockPrice[j]-stockPrice[j-1]);
+            optionValue = f[0][j-1] + (f[0][j] - f[0][j-1]) * (this.Option.getsNought()-stockPrice[j-1])/(stockPrice[j]-stockPrice[j-1]);
         return optionValue;
     }
     //Solve a tridiagonal system of linear equations
@@ -154,3 +163,4 @@ public class finiteDifference {
         return (-0.5*riskFreeRate*j*deltaT - 0.5*volatility*volatility*j*j*deltaT);
     }
 }
+
