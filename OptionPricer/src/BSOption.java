@@ -57,9 +57,9 @@ public class BSOption extends BlackScholes{
         double t=o.getTerm();
         double r=o.getRiskFreeRate();
         double sigma=o.getVolatility();
-        double d1=(Math.log(s0/k)+(r+sigma*sigma/2)*(t/12))/(sigma*Math.sqrt(t/12));
-        double d2=d1-sigma*Math.sqrt(t/12);
-        return k*Math.exp(-r*t/12)*cdf(-d2)-s0*cdf(-d1);
+        double d1=(Math.log(s0/k)+(r+sigma*sigma/2)*t)/(sigma*Math.sqrt(t));
+        double d2=d1-sigma*Math.sqrt(t);
+        return k*Math.exp(-r*t)*cdf(-d2)-s0*cdf(-d1);
     }
 
     /**
@@ -73,9 +73,9 @@ public class BSOption extends BlackScholes{
         double t=o.getTerm();
         double r=o.getRiskFreeRate();
         double sigma=o.getVolatility();
-        double d1=(Math.log(s0/k)+(r+sigma*sigma/2)*(t/12))/(sigma*Math.sqrt(t/12));
-        double d2=d1-sigma*Math.sqrt(t/12);
-        return s0*cdf(d1)-k*Math.exp(-r*t/12)*cdf(d2);
+        double d1=(Math.log(s0/k)+(r+sigma*sigma/2)*t)/(sigma*Math.sqrt(t));
+        double d2=d1-sigma*Math.sqrt(t);
+        return s0*cdf(d1)-k*Math.exp(-r*t)*cdf(d2);
     }
 
     /** Compute the cumulative (up to x) of the standard normal distribution.
@@ -115,10 +115,10 @@ public class BSOption extends BlackScholes{
 //     *************************************/
 //    public static void main(String args[]){
 //        BSOption bso=new BSOption();
-//        Option o1=new Option(50.0,50.0,0.1,0.4,5.0,OptionRight.CALL,OptionStyle.EUROPEAN);
+//        Option o1=new Option(50.0,50.0,0.1,0.4,5.0/12,OptionRight.CALL,OptionStyle.EUROPEAN);
 ////        System.out.println("EURO PUT, K=50,p=" + bso.crunchPut(o1));
 ////        System.out.println("EURO CALL, K=50,p="+bso.crunchCall(o1));
-//        Option o2=new Option(50.0,50.0,0.1,0.4,5.0,OptionRight.PUT,OptionStyle.EUROPEAN);
+//        Option o2=new Option(40.0,50.0,0.1,0.4,5.0/12,OptionRight.PUT,OptionStyle.EUROPEAN);
 ////        System.out.println("EURO PUT, K=40,p=" + bso.crunchPut(o2));
 ////        System.out.println("EURO CALL, K=40,p="+bso.crunchCall(o2));
 //        double prc[]=new double[11];

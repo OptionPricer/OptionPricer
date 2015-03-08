@@ -128,7 +128,7 @@ public class SOption extends Simulation{
             for (i = 0; i < numIntervals; i++) {
                 // nns = rand.nextSobelNormal();
                 //    nns = rand.nextMoroNormal();
-                nns=rand.nextGaussian(); //Not sure
+                nns=rand.nextGaussian();
                 s = s*Math.exp((o.getRiskFreeRate()-o.getVolatility()*o.getVolatility()/2)*deltaT +
                         o.getVolatility()*nns*Math.sqrt(deltaT));
                 trialRunningSum += s;
@@ -155,13 +155,13 @@ public class SOption extends Simulation{
 //    public static void main(String args[]){
 //        SOption bso=new SOption();
 //        bso.numIntervals=500;
-//        bso.numTrials=100;
-//        Option o1=new Option(50.0,50.0,0.1,0.4,5.0,OptionRight.CALL,OptionStyle.ASIAN);
-////        System.out.println(bso.crunchCall(o1));
-////        System.out.println(bso.crunchPut(o1));
-//        Option o2=new Option(40.0,50.0,0.1,0.4,5.0,OptionRight.CALL,OptionStyle.ASIAN);
-////        System.out.println(bso.crunchCall(o2));
-////        System.out.println(bso.crunchPut(o2));
+//        bso.numTrials=1000;
+//        Option o1=new Option(50.0,50.0,0.1,0.4,5.0/12,OptionRight.CALL,OptionStyle.ASIAN);
+//        System.out.println("ASIAN CALL,50, P="+bso.crunchCall(o1));
+//        System.out.println("ASIAN PUT,50, P="+bso.crunchPut(o1));
+//        Option o2=new Option(40.0,50.0,0.1,0.4,5.0/12,OptionRight.CALL,OptionStyle.ASIAN);
+//        System.out.println("ASIAN CALL,40, P="+bso.crunchCall(o2));
+//        System.out.println("ASIAN PUT,40, P="+bso.crunchPut(o2));
 //        for (int i = 0; i < 11 ; i++) {
 //            System.out.println(bso.computeOption(o1)[i]);
 //        }
