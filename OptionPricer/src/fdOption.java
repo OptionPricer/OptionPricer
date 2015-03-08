@@ -1,10 +1,9 @@
-package optionpricergit;
 import java.util.*;
 /**
  *
  * @author catherine_Liu
  */
-public class fdOption {
+public class fdOption extends FiniteDifference{
     Option Option;    
     int numOfTimeInterval;
     int numOfPriceInterval;
@@ -162,5 +161,6 @@ public class fdOption {
         double volatility = this.Option.getVolatility();
         return (-0.5*riskFreeRate*j*deltaT - 0.5*volatility*volatility*j*j*deltaT);
     }
+    
 }
 
