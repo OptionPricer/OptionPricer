@@ -1,11 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+package view;//package view;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.WindowConstants;
+import model.Option;
+import model.OptionRight;
+import model.OptionStyle;
 
 /**
  *
@@ -13,33 +20,34 @@ import java.awt.*;
  * @since 2015.03.03
  * @version 1.0.0
  */
-public class OptionPanel extends JPanel{
-
-    public OptionPanel(){
-        selectPanel = new JPanel();
-        backgroundPanel = new JPanel();
+public class OptionPanel extends JPanel implements ActionListener{
+    public OptionPanel(JFrame jf){
+        mainframe = jf;
+        option = new Option();
+        selectPanel = new javax.swing.JPanel();
+        backgroundPanel = new javax.swing.JPanel();
         infoLabel = new javax.swing.JLabel();
         EuropeanRadioButton = new javax.swing.JRadioButton();
         AmericanRadioButton = new javax.swing.JRadioButton();
         AsianRadioButton = new javax.swing.JRadioButton();
         callButton = new javax.swing.JButton();
         putButton = new javax.swing.JButton();
-
-        //setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        selectPanel.setBackground(new Color(150, 0, 0));
+       
+        selectPanel.setBackground(new java.awt.Color(150, 0, 0));
         backgroundPanel.setBackground(Color.white);
 
         infoLabel.setText("Please choose an option you want:");
 
         EuropeanRadioButton.setText("European");
-
         AmericanRadioButton.setText("American");
-
         AsianRadioButton.setText("Asian");
 
+        ButtonGroup group = new ButtonGroup();
+        group.add(EuropeanRadioButton);
+        group.add(AmericanRadioButton);
+        group.add(AsianRadioButton);
+        
         callButton.setText("CALL");
-
         putButton.setText("PUT");
 
         javax.swing.GroupLayout selectPanelLayout = new javax.swing.GroupLayout(selectPanel);
@@ -84,10 +92,10 @@ public class OptionPanel extends JPanel{
                     .addComponent(putButton))
                 .addGap(60, 60, 60))
         );
-
+               
         javax.swing.GroupLayout backgroundPanelLayout = new javax.swing.GroupLayout(backgroundPanel);
         backgroundPanel.setLayout(backgroundPanelLayout);
-        // Modifier: for the gap between selectPanel and backgroundPanel
+        // Modifier: for the gap between selectPanel and backgroundPanel 
         backgroundPanelLayout.setHorizontalGroup(
             backgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundPanelLayout.createSequentialGroup()
@@ -102,43 +110,75 @@ public class OptionPanel extends JPanel{
                 .addComponent(selectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(50, Short.MAX_VALUE))
         );
-
+               
         add(selectPanel, "center");
         add(backgroundPanel, "center");
+        
+//        EuropeanRadioButton.setMnemonic(KeyEvent.VK_P);
+        EuropeanRadioButton.setActionCommand(erb);
+        AmericanRadioButton.setActionCommand(amrb);
+        AsianRadioButton.setActionCommand(asrb);
+        callButton.setActionCommand(cb);
+        putButton.setActionCommand(pb);
+      
+        EuropeanRadioButton.addActionListener(this);
+        AmericanRadioButton.addActionListener(this);
+        AsianRadioButton.addActionListener(this);
+        callButton.addActionListener(this);
+        putButton.addActionListener(this);   
+        
+        //set default
+        EuropeanRadioButton.setSelected(true);
     }
-
-//    public static JPanel testJP(){
-//        JPanel t = new JPanel();
-//        t.setSize(300,300);
-//        t.setBackground(Color.BLUE);
-//
-//        return t;
-//    }
-
-//     public static void main(String[] args){
-//        JFrame a = new JFrame();
-//        a.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-//        a.setVisible(true);
-//        a.setSize(1000, 500);
-//        OptionPanel op = new OptionPanel();
-////        JPanel tp = testJP();
-////        tp.setBackground(Color.red);
-////        tp.setSize(200, 200);
-//        op.setSize(500, 500);
-//        //a.add(tp);
-//        //a.add(op);
-//        a.setContentPane(op);
-//    }
-
-
+      
+    public void actionPerformed(ActionEvent e){        
+        if(EuropeanRadioButton.isSelected()){
+            option.setStyle(OptionStyle.EUROPEAN);
+        }
+        else if(AmericanRadioButton.isSelected()){
+            option.setStyle(OptionStyle.AMERICAN);
+        }
+        else if(AsianRadioButton.isSelected()){
+            option.setStyle(OptionStyle.ASIAN);
+        }
+        
+        if(e.getActionCommand().equals("PUT")){
+            option.setRight(OptionRight.PUT);
+            new MainFrame("CONTROLL", option);   
+            System.out.println(option.getStyle()); 
+            System.out.println(option.getRight());  
+            mainframe.dispose();
+        }
+        else if(e.getActionCommand().equals("CALL")){
+            option.setRight(OptionRight.CALL);
+            new MainFrame("CONTROLL", option);   
+            System.out.println(option.getStyle()); 
+            System.out.println(option.getRight()); 
+            mainframe.dispose();
+        }
+        
+    }
+    
+    public Option getOption(){
+        return option;
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private JFrame mainframe;
+    private Option option;
+    private String erb = "European model.Option: ";
+    private String amrb = "American model.Option: ";
+    private String asrb = "Asian model.Option: ";
+    private String cb = "CALL";
+    private String pb = "PUT";
     private javax.swing.JRadioButton AmericanRadioButton;
     private javax.swing.JRadioButton AsianRadioButton;
     private javax.swing.JRadioButton EuropeanRadioButton;
     private javax.swing.JButton callButton;
     private javax.swing.JLabel infoLabel;
     private javax.swing.JButton putButton;
-    public JPanel selectPanel;
-    private JPanel backgroundPanel;
+    public javax.swing.JPanel selectPanel;
+    private javax.swing.JPanel backgroundPanel;
     // End of variables declaration//GEN-END:variables
 }

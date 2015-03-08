@@ -1,6 +1,8 @@
+package model;
+
 /**
  * @author Sky
- * Enum for Option style.
+ * Enum for model.Option style.
  */
 public enum  OptionStyle {
     AMERICAN, ASIAN, EUROPEAN;

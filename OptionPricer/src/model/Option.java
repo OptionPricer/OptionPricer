@@ -1,6 +1,8 @@
+package model;
+
 /**
  * @author Sky
- * A class for Option.
+ * A class for model.Option.
  */
 public class Option extends Product {
     private OptionRight right;

@@ -1,4 +1,4 @@
-//package view;
+package view;
 
 import java.awt.Component;
 import java.awt.Container;
@@ -7,12 +7,17 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import model.Option;
+import model.OptionRight;
 
 /**
  * This class show the main logic of the algorithms. 
@@ -21,9 +26,12 @@ import javax.swing.JTextField;
  * @since 2015.03.07
  * @version 1.0.0
  */
-public class ControllPanel extends JPanel{
+public class ControllPanel extends JPanel implements ActionListener{
     
-    public ControllPanel(){
+    public ControllPanel(JFrame jf, Option op){
+        mainframe = jf;
+        option = op;
+        
         this.setBackground(new java.awt.Color(150, 0, 0));
         this.setMaximumSize(new java.awt.Dimension(600, 350));
         this.setMinimumSize(new java.awt.Dimension(600, 350));
@@ -37,13 +45,13 @@ public class ControllPanel extends JPanel{
         algoInfoLabel = new JLabel();
         algoInfoLabel.setText("Check the algorithms(s) you want to use:");
         bsCheckBox = new JCheckBox();
-        bsCheckBox.setText("B-S formula");
+        bsCheckBox.setText("B-S Formula");
         btCheckBox = new JCheckBox();
-        btCheckBox.setText("Binomial tree");
+        btCheckBox.setText("Binomial Tree");
         niCheckBox = new JCheckBox();
         niCheckBox.setText("Numerical Integration");
         sCheckBox = new JCheckBox();
-        sCheckBox.setText("Simulation");
+        sCheckBox.setText("model.SimulationModel");
         
         cusInfoLabel = new JLabel();
         cusInfoLabel.setText("Customized algorithms:");
@@ -83,7 +91,6 @@ public class ControllPanel extends JPanel{
                 .addContainerGap(77, Short.MAX_VALUE))
         );
 
-       
         //contruct the parametersPanel
         paraInfoLabel = new JLabel();
         paraInfoLabel.setText("Parameters:");
@@ -91,17 +98,17 @@ public class ControllPanel extends JPanel{
         kLabel = new JLabel();
         tLabel = new JLabel();
         rLabel = new JLabel();
-        σLabel = new JLabel();
+        oLabel = new JLabel();
         s0Label.setText("S0:");
         kLabel.setText("K:");
         tLabel.setText("T:");
         rLabel.setText("r:");        
-        σLabel.setText("o(σ):");
+        oLabel.setText("o(σ):");
         sTextField = new JTextField(10);
         kTextField = new JTextField(10);
         tTextField = new JTextField(10);
         rTextField = new JTextField(10);
-        σTextField = new JTextField(10);
+        oTextField = new JTextField(10);
         
         parametersPanel.setBackground(new java.awt.Color(150,0,0));
         parametersPanel.setLayout(new GridLayout(6,2,2,10));
@@ -115,8 +122,8 @@ public class ControllPanel extends JPanel{
         parametersPanel.add(tTextField);        
         parametersPanel.add(rLabel);
         parametersPanel.add(rTextField);        
-        parametersPanel.add(σLabel);
-        parametersPanel.add(σTextField);
+        parametersPanel.add(oLabel);
+        parametersPanel.add(oTextField);
     
         
         //construct the choicePanel
@@ -185,13 +192,65 @@ public class ControllPanel extends JPanel{
         add(algorithmsPanel, "center");
         add(parametersPanel, "right");      //right is not useful?
         add(choicePanel, "center");
-        
-        //pack();
-       
+    
     }
    
+    public void initialComponent(){
+        addAlgorithmButton.setActionCommand("ADD");
+        calculateButton.setActionCommand("CALCULATE");
+        
+        addAlgorithmButton.addActionListener((ActionListener) this);
+        calculateButton.addActionListener((ActionListener) this);
+    }
+    
+    public void actionPerformed(ActionEvent e){
+        if(e.getActionCommand().equals("ADD")){
+            option.setRight(OptionRight.PUT);
+            new MainFrame("RESULT", option);   
+             
+            
+        }
+        else if(e.getActionCommand().equals("CALCULATE")){
+            if(sTextField.getText() == null || kTextField.getText() == null || 
+                    tTextField.getText() == null || rTextField.getText() == null 
+                    || oTextField.getText() == null){
+                System.out.println("parameter error");
+            }
+            
+            else{
+                double stf = Double.parseDouble(sTextField.getText());
+                double ktf = Double.parseDouble(kTextField.getText());
+                double ttf = Double.parseDouble(tTextField.getText());
+                double rtf = Double.valueOf(rTextField.getText());
+                double otf = Double.valueOf(oTextField.getText()).doubleValue();
+                
+                option.setsNought(stf);
+                option.setStrikeP(ktf);
+                option.setTerm(ttf);
+                option.setRiskFreeRate(rtf);
+                option.setVolatility(otf);
+                
+                if(bsCheckBox.isSelected() || btCheckBox.isSelected() ||
+                        niCheckBox.isSelected() || sCheckBox.isSelected()){ 
+                }
+                    
+                mainframe.dispose();
+            }
+        }
+          
+        
+        
+        
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private JFrame mainframe;
+    private Option option;
+    private String bsf = "B-S Formula";
+    private String bt = "Binomial Tree";
+    private String ni = "Numerical Integration";
+    private String si = "model.SimulationModel";
+    
     private javax.swing.JPanel algorithmsPanel;
     private javax.swing.JPanel parametersPanel;  //parameters
     private javax.swing.JPanel choicePanel;     //add, graph and calculate
@@ -216,8 +275,8 @@ public class ControllPanel extends JPanel{
     private javax.swing.JTextField tTextField;
     private javax.swing.JLabel rLabel;
     private javax.swing.JTextField rTextField;
-    private javax.swing.JLabel σLabel;
-    private javax.swing.JTextField σTextField;
+    private javax.swing.JLabel oLabel;
+    private javax.swing.JTextField oTextField;
     
     private javax.swing.JLabel cusInfoLabel;
     
