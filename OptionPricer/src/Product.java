@@ -8,7 +8,8 @@ public class Product {
     private double sNought;
     private double riskFreeRate;
     private double volatility;
-    private double term;
+    private double term;// Unit: years
+
 
     public Product() {
     }
