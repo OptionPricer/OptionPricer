@@ -1,11 +1,16 @@
-package view;//package view;
+package view;
 
+import controller.OPS;
 import java.awt.Container;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.WindowConstants;
-
 import model.Option;
 
 /**
@@ -18,7 +23,7 @@ import model.Option;
  */
 public class MainFrame extends JFrame{ 
     public MainFrame(){
-        setTitle("model.Option Pricer");
+        setTitle("Option Pricer");
         this.setBackground(new java.awt.Color(150, 0, 0));
         setSize(1000, 700);
         
@@ -34,31 +39,31 @@ public class MainFrame extends JFrame{
         c.add(op);              
         
 //        // main controll area
-//        view.OptionInfoPanel oip = new view.OptionInfoPanel("American model.Option", "CALL");
+//        OptionInfoPanel oip = new OptionInfoPanel("American Option", "CALL");
 //        c.add(oip);
 //        JButton backButton = new JButton();
 //        backButton.setText("");
 //        c.add(backButton);
         
-//        view.ControllPanel cp = new view.ControllPanel();
+//        ControllPanel cp = new ControllPanel();
 //        c.add(cp);
         
         // result area
-//        view.OptionInfoPanel oip = new view.OptionInfoPanel("American model.Option", "CALL");
+//        OptionInfoPanel oip = new OptionInfoPanel("American Option", "CALL");
 //        c.add(oip);
 //        JButton backButton = new JButton();
 //        backButton.setText("");
 //        c.add(backButton);
 //        
-//        view.ResultPanel rp = new view.ResultPanel();
+//        ResultPanel rp = new ResultPanel();
 //        c.add(rp);
                      
         setVisible(true);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);    
     }
     
-    public MainFrame(String operation, Option op){
-        setTitle("model.Option Pricer");
+    public MainFrame(String operation){
+        setTitle("Option Pricer");
         this.setBackground(new java.awt.Color(150, 0, 0));
         setSize(1000, 700);
         
@@ -70,25 +75,39 @@ public class MainFrame extends JFrame{
         
         if(operation.equals("CONTROLL")){
             // main controll area
-            OptionInfoPanel oip = new OptionInfoPanel(op.getStyle(), op.getRight());
+            OptionInfoPanel oip = new OptionInfoPanel(OPS.theOption.getStyle(), OPS.theOption.getRight());
             c.add(oip);
+            final MainFrame tempmf = this;
             JButton backButton = new JButton();
             backButton.setText("");
+            backButton.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    new MainFrame();
+                    tempmf.dispose();
+                }
+            });           
             c.add(backButton);
-
-            ControllPanel cp = new ControllPanel(this, op);
+            
+            ControllPanel cp = new ControllPanel(this);
             c.add(cp);
         }
         
         else if(operation.equals("RESULT")){
             // result area
-            OptionInfoPanel oip = new OptionInfoPanel(op.getStyle(), op.getRight());
+            OptionInfoPanel oip = new OptionInfoPanel(OPS.theOption.getStyle(), OPS.theOption.getRight());
             c.add(oip);
+            final MainFrame tempmf = this;
             JButton backButton = new JButton();
             backButton.setText("");
+            backButton.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    new MainFrame();
+                    tempmf.dispose();
+                }
+            });           
             c.add(backButton);
             
-            ResultPanel rp = new ResultPanel(op);
+            ResultPanel rp = new ResultPanel();
             c.add(rp);
         }
    
@@ -130,9 +149,8 @@ public class MainFrame extends JFrame{
 
     }
     
-    
     public static void main(String[] args){
-        new MainFrame().setVisible(true);
+        new MainFrame().setVisible(true);       
     }
     
 

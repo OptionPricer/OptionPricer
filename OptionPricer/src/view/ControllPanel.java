@@ -1,7 +1,6 @@
 package view;
 
-import java.awt.Component;
-import java.awt.Container;
+import controller.OPS;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -9,15 +8,14 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import model.Option;
 import model.OptionRight;
+import model.OptionStyle;
 
 /**
  * This class show the main logic of the algorithms. 
@@ -28,9 +26,9 @@ import model.OptionRight;
  */
 public class ControllPanel extends JPanel implements ActionListener{
     
-    public ControllPanel(JFrame jf, Option op){
+    public ControllPanel(JFrame jf){
         mainframe = jf;
-        option = op;
+        tempcp  = this;
         
         this.setBackground(new java.awt.Color(150, 0, 0));
         this.setMaximumSize(new java.awt.Dimension(600, 350));
@@ -51,45 +49,76 @@ public class ControllPanel extends JPanel implements ActionListener{
         niCheckBox = new JCheckBox();
         niCheckBox.setText("Numerical Integration");
         sCheckBox = new JCheckBox();
-        sCheckBox.setText("model.SimulationModel");
+        sCheckBox.setText("Simulation");
         
         cusInfoLabel = new JLabel();
         cusInfoLabel.setText("Customized algorithms:");
         
-        javax.swing.GroupLayout algorithmsPanelLayout = new javax.swing.GroupLayout(algorithmsPanel);
-        algorithmsPanel.setLayout(algorithmsPanelLayout);
-        algorithmsPanelLayout.setHorizontalGroup(
-            algorithmsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(algorithmsPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(algorithmsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, algorithmsPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(algorithmsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(algoInfoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(niCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(algorithmsPanelLayout.createSequentialGroup()
-                        .addComponent(cusInfoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        algorithmsPanelLayout.setVerticalGroup(
-            algorithmsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, algorithmsPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(algoInfoLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(niCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(sCheckBox)
-                .addGap(18, 18, 18)
-                .addComponent(cusInfoLabel)
-                .addContainerGap(77, Short.MAX_VALUE))
-        );
+//        algorithmsPanel.setBackground(new java.awt.Color(150,0,0));
+        algorithmsPanel.setLayout(new GridLayout(7,3,2,10));
+        algorithmsPanel.setMaximumSize(new java.awt.Dimension(300, 200));
+        algorithmsPanel.setMinimumSize(new java.awt.Dimension(300, 200));
+        algorithmsPanel.setPreferredSize(new java.awt.Dimension(300, 200));    
+//        algorithmsPanel.setSize(new java.awt.Dimension(600, 350));
+        algorithmsPanel.add(algoInfoLabel);
+        if(OPS.theOption.getStyle() == OptionStyle.AMERICAN){
+            if(OPS.theOption.getRight() == OptionRight.PUT){
+                algorithmsPanel.add(btCheckBox);
+                algorithmsPanel.add(sCheckBox);
+                algorithmsPanel.add(niCheckBox);
+            }
+            else{
+                algorithmsPanel.add(bsCheckBox);
+                algorithmsPanel.add(btCheckBox);
+                algorithmsPanel.add(sCheckBox);
+                algorithmsPanel.add(niCheckBox);
+            }
+        }
+        else if(OPS.theOption.getStyle() == OptionStyle.EUROPEAN){
+            algorithmsPanel.add(bsCheckBox);
+            algorithmsPanel.add(btCheckBox);
+            algorithmsPanel.add(sCheckBox);
+            algorithmsPanel.add(niCheckBox);            
+        }
+        else if(OPS.theOption.getStyle() == OptionStyle.ASIAN){
+            algorithmsPanel.add(sCheckBox);
+        }
+        algorithmsPanel.add(cusInfoLabel);        
+        
+//        javax.swing.GroupLayout algorithmsPanelLayout = new javax.swing.GroupLayout(algorithmsPanel);
+//        algorithmsPanel.setLayout(algorithmsPanelLayout);
+//        algorithmsPanelLayout.setHorizontalGroup(
+//            algorithmsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//            .addGroup(algorithmsPanelLayout.createSequentialGroup()
+//                .addContainerGap()
+//                .addGroup(algorithmsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, algorithmsPanelLayout.createSequentialGroup()
+//                        .addGap(0, 0, Short.MAX_VALUE)
+//                        .addGroup(algorithmsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//                            .addComponent(algoInfoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+//                            .addComponent(btCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+//                            .addComponent(niCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+//                            .addComponent(sCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+//                    .addGroup(algorithmsPanelLayout.createSequentialGroup()
+//                        .addComponent(cusInfoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+//                        .addGap(0, 0, Short.MAX_VALUE)))
+//                .addContainerGap())
+//        );
+//        algorithmsPanelLayout.setVerticalGroup(
+//            algorithmsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, algorithmsPanelLayout.createSequentialGroup()
+//                .addContainerGap()
+//                .addComponent(algoInfoLabel)
+//                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+//                .addComponent(btCheckBox)
+//                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+//                .addComponent(niCheckBox)
+//                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+//                .addComponent(sCheckBox)
+//                .addGap(18, 18, 18)
+//                .addComponent(cusInfoLabel)
+//                .addContainerGap(77, Short.MAX_VALUE))
+//        );
 
         //contruct the parametersPanel
         paraInfoLabel = new JLabel();
@@ -124,7 +153,6 @@ public class ControllPanel extends JPanel implements ActionListener{
         parametersPanel.add(rTextField);        
         parametersPanel.add(oLabel);
         parametersPanel.add(oTextField);
-    
         
         //construct the choicePanel
         noteLabel = new JLabel();
@@ -138,12 +166,16 @@ public class ControllPanel extends JPanel implements ActionListener{
         customizedAlgorithmTextField = new JTextField();
         customizedAlgorithmTextField.setText("[Enter alternate fomula. e.g: S+K+T-r*o]");
         addAlgorithmButton = new JButton();
-        addAlgorithmButton.setText("Add");
+        addAlgorithmButton.setText("ADD");
         //addAlgorithmButton.setSize(new java.awt.Dimension(50, 100));
         graphCheckBox = new JCheckBox();
         graphCheckBox.setText("Show graph");
+//        graphCheckBox.setMinimumSize(new java.awt.Dimension(10, 15));
+//        graphCheckBox.setPreferredSize(new java.awt.Dimension(10, 15));
+//        graphCheckBox.setMaximumSize(new java.awt.Dimension(10, 15));
         calculateButton = new JButton();
         calculateButton.setText("CALCULATE");
+        
         
         choicePanel.setBackground(new java.awt.Color(150,0,0));
         choicePanel.setLayout(new GridBagLayout());
@@ -164,51 +196,58 @@ public class ControllPanel extends JPanel implements ActionListener{
         choicePanel.add(instruction2Label, c);
                 
         c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridwidth = 40;
+        c.insets = new Insets(0, 0, 0, 35);     //keep the right distance
         c.gridx = 0;
         c.gridy = 3;
         choicePanel.add(customizedAlgorithmTextField, c);
                 
         c.fill = GridBagConstraints.HORIZONTAL;
-        c.insets = new Insets(10, 0, 0, 0);
         c.gridwidth = 40;
         c.gridx = 1;
         c.gridy = 3;
+        c.fill = 0;         //not resize
         choicePanel.add(addAlgorithmButton, c);
         
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.insets = new Insets(10, 0, 0, 0);
+        c.fill = GridBagConstraints.HORIZONTAL;   
+        c.insets = new Insets(20, 0, 0, 0);     //keep the top distance
+        c.ipadx = 10;
         c.gridx = 0;
         c.gridy = 4;
+        c.fill = 0;
+        c.anchor = java.awt.GridBagConstraints.WEST;
         choicePanel.add(graphCheckBox, c);
         
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 1;
         c.gridy = 4;
+        c.fill = 0;
         choicePanel.add(calculateButton, c);
         
         //to the left, 0 and 0 gap
-        this.setLayout(new FlowLayout(0, 0, 0));
+        this.setLayout(new FlowLayout(0, 5, 5));
         add(algorithmsPanel, "center");
         add(parametersPanel, "right");      //right is not useful?
         add(choicePanel, "center");
-    
+        
+        initialComponent();
     }
    
     public void initialComponent(){
         addAlgorithmButton.setActionCommand("ADD");
         calculateButton.setActionCommand("CALCULATE");
         
-        addAlgorithmButton.addActionListener((ActionListener) this);
-        calculateButton.addActionListener((ActionListener) this);
+//        sTextField.addActionListener(tempcp);        
+//        kTextField.addActionListener(tempcp);
+//        tTextField.addActionListener(tempcp);
+//        rTextField.addActionListener(tempcp);
+//        oTextField.addActionListener(tempcp);
+        addAlgorithmButton.addActionListener(tempcp);
+        calculateButton.addActionListener(tempcp);
     }
     
     public void actionPerformed(ActionEvent e){
         if(e.getActionCommand().equals("ADD")){
-            option.setRight(OptionRight.PUT);
-            new MainFrame("RESULT", option);   
-             
-            
+//            OPS.theOption.setRight(OptionRight.PUT);
         }
         else if(e.getActionCommand().equals("CALCULATE")){
             if(sTextField.getText() == null || kTextField.getText() == null || 
@@ -224,32 +263,35 @@ public class ControllPanel extends JPanel implements ActionListener{
                 double rtf = Double.valueOf(rTextField.getText());
                 double otf = Double.valueOf(oTextField.getText()).doubleValue();
                 
-                option.setsNought(stf);
-                option.setStrikeP(ktf);
-                option.setTerm(ttf);
-                option.setRiskFreeRate(rtf);
-                option.setVolatility(otf);
+                OPS.theOption.setsNought(stf);
+                OPS.theOption.setStrikeP(ktf);
+                OPS.theOption.setTerm(ttf);
+                OPS.theOption.setRiskFreeRate(rtf);
+                OPS.theOption.setVolatility(otf);
                 
                 if(bsCheckBox.isSelected() || btCheckBox.isSelected() ||
                         niCheckBox.isSelected() || sCheckBox.isSelected()){ 
+                    System.out.println(OPS.theOption.getStyle());
+                    System.out.println(OPS.theOption.getRight());
+                    System.out.print("s:" + OPS.theOption.getsNought() + ", ");
+                    System.out.print("k:" + OPS.theOption.getStrikeP()+ ", ");
+                    System.out.print("t:" + OPS.theOption.getTerm()+ ", ");
+                    System.out.print("r:" + OPS.theOption.getRiskFreeRate()+ ", ");
+                    System.out.print("o:" + OPS.theOption.getVolatility());
                 }
-                    
+                new MainFrame("RESULT");   
                 mainframe.dispose();
             }
-        }
-          
-        
-        
-        
+        }       
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JFrame mainframe;
-    private Option option;
+    private ControllPanel tempcp;   //used for the button actionperformed    
     private String bsf = "B-S Formula";
     private String bt = "Binomial Tree";
     private String ni = "Numerical Integration";
-    private String si = "model.SimulationModel";
+    private String si = "Simulation";
     
     private javax.swing.JPanel algorithmsPanel;
     private javax.swing.JPanel parametersPanel;  //parameters
@@ -285,11 +327,5 @@ public class ControllPanel extends JPanel implements ActionListener{
     private javax.swing.JLabel noteLabel;
     private javax.swing.JLabel instruction1Label;
     private javax.swing.JLabel instruction2Label;
-
-//    private javax.swing.JLabel jLabel1;
-//    private javax.swing.JLabel optionLabel;
-//    private javax.swing.JLabel promptLabel1;
-//    private javax.swing.JLabel promptLabel2;
-//    private javax.swing.JLabel promptLabel3;
     // End of variables declaration//GEN-END:variables
 }

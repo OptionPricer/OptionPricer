@@ -18,7 +18,7 @@ import model.Option;
  * @version 1.0.0
  */
 public class ResultPanel extends JPanel{
-    public ResultPanel(Option op){
+    public ResultPanel(){
         promptLabel = new JLabel();
         resultTable = new JTable();
         restartButton = new JButton();
@@ -27,7 +27,7 @@ public class ResultPanel extends JPanel{
         
         resultTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"model.SimulationModel", "50.00", "50.00", "5", "0.10", "0.40", "0.91"},
+                {"Simulation", "50.00", "50.00", "5", "0.10", "0.40", "0.91"},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null}
