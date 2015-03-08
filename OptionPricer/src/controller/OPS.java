@@ -10,6 +10,10 @@ import java.util.ArrayList;
  */
 public class OPS {
     /**
+     * An arraylist to store the names of algorithms chosen by the user.
+     */
+    public static ArrayList<String> algNames;
+    /**
      * An arraylist to store the algorithms chosen by the user.
      */
     public static ArrayList<Algorithm> algList;
@@ -38,6 +42,7 @@ public class OPS {
         // then it will call findApplicableAlgs().
     }
     public static void createAlgorithm(String algName){
+        algNames = new ArrayList<String>();
         // Not sure what to do so far.
     }
 
@@ -73,6 +78,7 @@ public class OPS {
      * A method to calculate option price using all the algorithms that user has chosen.
      */
     public static void compute(){
+
         for(Algorithm al:algList){
             results.add(al.computeOption(theOption));
         }

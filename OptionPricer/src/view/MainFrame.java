@@ -73,8 +73,8 @@ public class MainFrame extends JFrame{
         c.setLayout(new FlowLayout(1, 10, 10));
         c.add(headPanel);             
         
-        if(operation.equals("CONTROLL")){
-            // main controll area
+        if(operation.equals("CONTROL")){
+            // main control area
             OptionInfoPanel oip = new OptionInfoPanel(OPS.theOption.getStyle(), OPS.theOption.getRight());
             c.add(oip);
             final MainFrame tempmf = this;
@@ -88,7 +88,7 @@ public class MainFrame extends JFrame{
             });           
             c.add(backButton);
             
-            ControllPanel cp = new ControllPanel(this);
+            ControlPanel cp = new ControlPanel(this);
             c.add(cp);
         }
         
