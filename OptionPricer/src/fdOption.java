@@ -4,7 +4,7 @@ import java.util.*;
  *
  * @author catherine_Liu
  */
-public class finiteDifference {
+public class fdOption {
     Option Option;    
     int numOfTimeInterval;
     int numOfPriceInterval;
@@ -13,7 +13,7 @@ public class finiteDifference {
     finiteDifference(){
        
     }
-    finiteDifference(Option givenOption,int N, int M, double sMax){
+    fdOption(Option givenOption,int N, int M, double sMax){
         Option = givenOption;
         this.numOfTimeInterval = N;
         this.numOfPriceInterval = M;
