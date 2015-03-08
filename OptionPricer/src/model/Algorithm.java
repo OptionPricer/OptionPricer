@@ -1,3 +1,5 @@
+package model;
+
 /**
  * @author Sky
  * An abstract class for algorithms to calculate the price of financial products.
@@ -16,23 +18,11 @@ public abstract class Algorithm {
      */
     public final double VOLINTERVAL =0.1;
     /**
-     * An abstract method to calculate the price of an Option.
-     * @param o the Option object to be calculated.
+     * An abstract method to calculate the price of an model.Option.
+     * @param o the model.Option object to be calculated.
      * @return the result.
      */
     abstract public double[] computeOption(Option o);
-    /**
-     * An abstract method to calculate the price of a put option.
-     * @param o the Option object to be calculated.
-     * @return the result.
-     */
-    abstract public double crunchPut(Option o);
 
-    /**
-     * An abstract method to calculate the price of a call option.
-     * @param o the Option object to be calculated.
-     * @return the result.
-     */
-    abstract public double crunchCall(Option o);
 
 }

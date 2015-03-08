@@ -1,3 +1,7 @@
+package controller;
+
+import model.*;
+
 import java.util.ArrayList;
 
 /**
@@ -24,10 +28,10 @@ public class OPS {
 
     /**
      * To create an option.
-     * This method is called when the OptionRight and OptionStyle is decided,i.e., the Call/Put button is clicked.
+     * This method is called when the model.OptionRight and model.OptionStyle is decided,i.e., the Call/Put button is clicked.
      *
-     * @param r The Option right. (CALL/PUT)
-     * @param s The Option Style. (ASIAN/EUROPEAN/AMERICAN)
+     * @param r The model.Option right. (CALL/PUT)
+     * @param s The model.Option Style. (ASIAN/EUROPEAN/AMERICAN)
      */
     public static void createOption(OptionRight r, OptionStyle s){
         theOption=new Option(r,s);

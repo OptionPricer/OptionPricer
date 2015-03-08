@@ -1,7 +1,9 @@
-//package view;
+package view;
 
-import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import model.OptionRight;
+import model.OptionStyle;
 
 /**
  * This class is used to show the information of which option and what the type
@@ -21,18 +23,18 @@ public class OptionInfoPanel extends JPanel{
         this.setPreferredSize(new java.awt.Dimension(1000, 50));
         
         optionLabel = new JLabel();
-        optionLabel.setText("Text Option");
+        optionLabel.setText("Text model.Option");
         this.add(optionLabel);
     }
     
-    public OptionInfoPanel(String option, String right){        
+    public OptionInfoPanel(OptionStyle style, OptionRight right){        
         this.setBackground(new java.awt.Color(200, 0, 0));
         this.setMaximumSize(new java.awt.Dimension(1000, 50));
         this.setMinimumSize(new java.awt.Dimension(1000, 50));
         this.setPreferredSize(new java.awt.Dimension(1000, 50));
         
         optionLabel = new JLabel();
-        String info = option + ": " + right;
+        String info = style + ": " + right;
         optionLabel.setText(info);
         this.add(optionLabel);
     }

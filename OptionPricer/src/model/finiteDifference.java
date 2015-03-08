@@ -1,5 +1,5 @@
-package optionpricergit;
-import java.util.*;
+package model;//package optionpricergit;
+
 /**
  *
  * @author catherine_Liu

@@ -1,3 +1,5 @@
+package model;
+
 /**
  * @author Sky
  * A class of general financial products

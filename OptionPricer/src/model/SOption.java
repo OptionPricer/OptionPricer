@@ -1,3 +1,5 @@
+package model;
+
 import java.util.Random;
 
 /**
@@ -30,9 +32,9 @@ public class SOption extends Simulation{
     public SOption(){};
 
     /**
-     * An method to calculate the price of an Option using Simulation.
+     * An method to calculate the price of an model.Option using model.Simulation.
      * This method will also calculate different option prices in response to the change of volatility.
-     * @param o the Option object to be calculated.
+     * @param o the model.Option object to be calculated.
      * @return the array of prices.
      */
     @Override
@@ -64,14 +66,14 @@ public class SOption extends Simulation{
     }
 
     /**
-     * A method to calculate the price of a put option using Simulation.
+     * A method to calculate the price of a put option using model.Simulation.
      * This method is taken from the given C++ project, AmericanPutOption.
      * Some adaptions are made to "translate" it into Java.
-     * @param o the Option object to be calculated.
+     * @param o the model.Option object to be calculated.
      * @return the result.
      */
-    @Override
-    public double crunchPut(Option o) {
+
+    private double crunchPut(Option o) {
         int i, trialCount;
         double deltaT = o.getTerm()/(double)numIntervals;
         double trialRunningSum, trialAverage, trialPayoff;
@@ -106,14 +108,14 @@ public class SOption extends Simulation{
 
 
     /**
-     * A method to calculate the price of a put option using Simulation.
+     * A method to calculate the price of a put option using model.Simulation.
      * This method is taken from the given C++ project, AmericanPutOption.
      * Some adaptions are made to "translate" it into Java.
-     * @param o the Option object to be calculated.
+     * @param o the model.Option object to be calculated.
      * @return the result.
      */
-    @Override
-    public double crunchCall(Option o) {
+
+    private double crunchCall(Option o) {
         int i, trialCount;
         double deltaT = o.getTerm()/(double)numIntervals;
         double trialRunningSum, trialAverage, trialPayoff;
@@ -149,17 +151,17 @@ public class SOption extends Simulation{
 
 
 //    /**************************************
-//     * testing for Simulation algorithm.
+//     * testing for model.Simulation algorithm.
 //     * @param args
 //     *************************************/
 //    public static void main(String args[]){
-//        SOption bso=new SOption();
+//        model.SOption bso=new model.SOption();
 //        bso.numIntervals=500;
 //        bso.numTrials=1000;
-//        Option o1=new Option(50.0,50.0,0.1,0.4,5.0/12,OptionRight.CALL,OptionStyle.ASIAN);
+//        model.Option o1=new model.Option(50.0,50.0,0.1,0.4,5.0/12,model.OptionRight.CALL,model.OptionStyle.ASIAN);
 //        System.out.println("ASIAN CALL,50, P="+bso.crunchCall(o1));
 //        System.out.println("ASIAN PUT,50, P="+bso.crunchPut(o1));
-//        Option o2=new Option(40.0,50.0,0.1,0.4,5.0/12,OptionRight.CALL,OptionStyle.ASIAN);
+//        model.Option o2=new model.Option(40.0,50.0,0.1,0.4,5.0/12,model.OptionRight.CALL,model.OptionStyle.ASIAN);
 //        System.out.println("ASIAN CALL,40, P="+bso.crunchCall(o2));
 //        System.out.println("ASIAN PUT,40, P="+bso.crunchPut(o2));
 //        for (int i = 0; i < 11 ; i++) {
