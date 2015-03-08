@@ -50,19 +50,19 @@ public class OPS {
         ArrayList<Algorithm> appAlgs=new ArrayList<Algorithm>();
         switch(o.getStyle()) {
             case ASIAN: {
-                appAlgs.add(new SOption());
+                appAlgs.add(new SimulationModel());
                 break;
             }
             case EUROPEAN: {
-                appAlgs.add(new SOption());
-                appAlgs.add(new BSOption());
+                appAlgs.add(new SimulationModel());
+                appAlgs.add(new BlackScholesModel());
                 // add Binomial Tree and finite difference algorithm
                 break;
             }
             case AMERICAN: {
-                appAlgs.add(new SOption());
+                appAlgs.add(new SimulationModel());
                 // add Binomial Tree and finite difference algorithm
-                if (o.getRight() == OptionRight.CALL) appAlgs.add(new BSOption());
+                if (o.getRight() == OptionRight.CALL) appAlgs.add(new BlackScholesModel());
                 break;
             }
         }

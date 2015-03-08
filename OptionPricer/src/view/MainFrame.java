@@ -1,4 +1,4 @@
-package model;//package view;
+package view;//package view;
 
 import java.awt.Container;
 import java.awt.FlowLayout;
@@ -6,10 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
-import view.ControllPanel;
-import view.OptionInfoPanel;
-import view.OptionPanel;
-import view.ResultPanel;
+import model.Option;
 
 /**
  * This main frame is the basic container for all other sub frames.

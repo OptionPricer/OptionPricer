@@ -5,11 +5,11 @@ package model;
  * A class for model.Option Price calculation by Black-Scholes formula.
  * Note: Black-Scholes is applicable for European call & put option and American call option.
  */
-public class BSOption extends BlackScholes{
+public class BlackScholesModel extends Algorithm{
     /**
      * Constructor.
      */
-    public BSOption() {
+    public BlackScholesModel() {
     }
 
     /**
@@ -26,9 +26,9 @@ public class BSOption extends BlackScholes{
         if(o.getRight()==OptionRight.PUT){
             prices[count]=crunchPut(o); // Middle point should be the "original" option.
             for (int i = count ; i >0 ; i--) {
-                o.setVolatility(vBase*(1-i* VOLINTERVAL));
+                o.setVolatility(vBase*(1-i* VOLAINTERVAL));
                 prices[count-i]=crunchPut(o);
-                o.setVolatility(vBase*(1+i* VOLINTERVAL));
+                o.setVolatility(vBase*(1+i* VOLAINTERVAL));
                 prices[count+i]=crunchPut(o);
             }
         }
@@ -36,9 +36,9 @@ public class BSOption extends BlackScholes{
         if(o.getRight()==OptionRight.CALL){
             prices[count]=crunchCall(o); // Middle point should be the "original" option.
             for (int i = count ; i >0 ; i--) {
-                o.setVolatility(vBase*(1-i* VOLINTERVAL));
+                o.setVolatility(vBase*(1-i* VOLAINTERVAL));
                 prices[count-i]=crunchCall(o);
-                o.setVolatility(vBase*(1+i* VOLINTERVAL));
+                o.setVolatility(vBase*(1+i* VOLAINTERVAL));
                 prices[count+i]=crunchCall(o);
             }
         }
@@ -115,7 +115,7 @@ public class BSOption extends BlackScholes{
 //     * @param args
 //     *************************************/
 //    public static void main(String args[]){
-//        model.BSOption bso=new model.BSOption();
+//        model.BlackScholesModel bso=new model.BlackScholesModel();
 //        model.Option o1=new model.Option(50.0,50.0,0.1,0.4,5.0/12,model.OptionRight.CALL,model.OptionStyle.EUROPEAN);
 ////        System.out.println("EURO PUT, K=50,p=" + bso.crunchPut(o1));
 ////        System.out.println("EURO CALL, K=50,p="+bso.crunchCall(o1));

@@ -12,11 +12,11 @@ public abstract class Algorithm {
     /**
      * Constant. The number of dots used to construct the volatility smile.
      */
-    public final int NUMOFDOTS=11;
+    final int NUMOFDOTS=11;
     /**
      * Constant. The interval of change in volatility in the graph.
      */
-    public final double VOLINTERVAL =0.1;
+    final double VOLAINTERVAL =0.1;
     /**
      * An abstract method to calculate the price of an model.Option.
      * @param o the model.Option object to be calculated.

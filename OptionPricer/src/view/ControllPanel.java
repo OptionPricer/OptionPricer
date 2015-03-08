@@ -51,7 +51,7 @@ public class ControllPanel extends JPanel implements ActionListener{
         niCheckBox = new JCheckBox();
         niCheckBox.setText("Numerical Integration");
         sCheckBox = new JCheckBox();
-        sCheckBox.setText("model.Simulation");
+        sCheckBox.setText("model.SimulationModel");
         
         cusInfoLabel = new JLabel();
         cusInfoLabel.setText("Customized algorithms:");
@@ -249,7 +249,7 @@ public class ControllPanel extends JPanel implements ActionListener{
     private String bsf = "B-S Formula";
     private String bt = "Binomial Tree";
     private String ni = "Numerical Integration";
-    private String si = "model.Simulation";
+    private String si = "model.SimulationModel";
     
     private javax.swing.JPanel algorithmsPanel;
     private javax.swing.JPanel parametersPanel;  //parameters

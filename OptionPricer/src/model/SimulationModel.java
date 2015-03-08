@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * Created by Sky on 2015/3/6-006.
  */
-public class SOption extends Simulation{
+public class SimulationModel extends Algorithm{
     private int numIntervals;
     private int numTrials;
 
@@ -29,10 +29,10 @@ public class SOption extends Simulation{
     /**
      * Constructor.
      */
-    public SOption(){};
+    public SimulationModel(){};
 
     /**
-     * An method to calculate the price of an model.Option using model.Simulation.
+     * An method to calculate the price of an model.Option using model.SimulationModel.
      * This method will also calculate different option prices in response to the change of volatility.
      * @param o the model.Option object to be calculated.
      * @return the array of prices.
@@ -46,9 +46,9 @@ public class SOption extends Simulation{
         if(o.getRight()==OptionRight.PUT){
             prices[count]=crunchPut(o); // Middle point should be the "original" option.
             for (int i = count ; i >0 ; i--) {
-                o.setVolatility(vBase*(1-i* VOLINTERVAL));
+                o.setVolatility(vBase*(1-i* VOLAINTERVAL));
                 prices[count-i]=crunchPut(o);
-                o.setVolatility(vBase*(1+i* VOLINTERVAL));
+                o.setVolatility(vBase*(1+i* VOLAINTERVAL));
                 prices[count+i]=crunchPut(o);
             }
         }
@@ -56,9 +56,9 @@ public class SOption extends Simulation{
         if(o.getRight()==OptionRight.CALL){
             prices[count]=crunchCall(o); // Middle point should be the "original" option.
             for (int i = count ; i >0 ; i--) {
-                o.setVolatility(vBase*(1-i* VOLINTERVAL));
+                o.setVolatility(vBase*(1-i* VOLAINTERVAL));
                 prices[count-i]=crunchCall(o);
-                o.setVolatility(vBase*(1+i* VOLINTERVAL));
+                o.setVolatility(vBase*(1+i* VOLAINTERVAL));
                 prices[count+i]=crunchCall(o);
             }
         }
@@ -66,7 +66,7 @@ public class SOption extends Simulation{
     }
 
     /**
-     * A method to calculate the price of a put option using model.Simulation.
+     * A method to calculate the price of a put option using model.SimulationModel.
      * This method is taken from the given C++ project, AmericanPutOption.
      * Some adaptions are made to "translate" it into Java.
      * @param o the model.Option object to be calculated.
@@ -88,7 +88,7 @@ public class SOption extends Simulation{
             for (i = 0; i < numIntervals; i++) {
                 // nns = rand.nextSobelNormal();
                 //    nns = rand.nextMoroNormal();
-                nns=rand.nextGaussian(); //Not sure
+                nns=rand.nextGaussian();
                 s = s*Math.exp((o.getRiskFreeRate()-o.getVolatility()*o.getVolatility()/2)*deltaT +
                         o.getVolatility()*nns*Math.sqrt(deltaT));
                 trialRunningSum += s;
@@ -108,7 +108,7 @@ public class SOption extends Simulation{
 
 
     /**
-     * A method to calculate the price of a put option using model.Simulation.
+     * A method to calculate the price of a put option using model.SimulationModel.
      * This method is taken from the given C++ project, AmericanPutOption.
      * Some adaptions are made to "translate" it into Java.
      * @param o the model.Option object to be calculated.
@@ -151,11 +151,11 @@ public class SOption extends Simulation{
 
 
 //    /**************************************
-//     * testing for model.Simulation algorithm.
+//     * testing for model.SimulationModel algorithm.
 //     * @param args
 //     *************************************/
 //    public static void main(String args[]){
-//        model.SOption bso=new model.SOption();
+//        model.SimulationModel bso=new model.SimulationModel();
 //        bso.numIntervals=500;
 //        bso.numTrials=1000;
 //        model.Option o1=new model.Option(50.0,50.0,0.1,0.4,5.0/12,model.OptionRight.CALL,model.OptionStyle.ASIAN);

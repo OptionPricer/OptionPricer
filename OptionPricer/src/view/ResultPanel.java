@@ -27,7 +27,7 @@ public class ResultPanel extends JPanel{
         
         resultTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"model.Simulation", "50.00", "50.00", "5", "0.10", "0.40", "0.91"},
+                {"model.SimulationModel", "50.00", "50.00", "5", "0.10", "0.40", "0.91"},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null}
