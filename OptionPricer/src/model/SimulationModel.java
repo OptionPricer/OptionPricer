@@ -30,7 +30,7 @@ public class SimulationModel extends Algorithm{
     /**
      * Constructor.
      */
-    public SimulationModel(){};
+    public SimulationModel(){}
 
     /**
      * An method to calculate the price of an model.Option using model.SimulationModel.

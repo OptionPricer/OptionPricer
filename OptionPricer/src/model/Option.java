@@ -7,6 +7,18 @@ package model;
 public class Option extends Product {
     private OptionRight right;
     private OptionStyle style;
+    
+    //additional parameters for FiniteDifference    
+    private int FDnti;      //number of time intervals
+    private int FDnpi;      //number of price intervals
+    private double FDsmax;    //the max limitation stock price
+    
+    //additional parameters for BinoialTree
+    private int BTnti;      //number of time intervals
+   
+    //additional parameters for Simulation
+    private int Snti;       //number of time intervals
+    private int Snt;        //number of trials
 
     public OptionRight getRight() {
         return right;
@@ -39,6 +51,54 @@ public class Option extends Product {
         this.right = right;
         this.style = style;
     }
+    
+    public int getFDnti() {
+        return FDnti;
+    }
+
+    public void setFDnti(int FDnti) {
+        this.FDnti = FDnti;
+    }
+
+    public int getFDnpi() {
+        return FDnpi;
+    }
+
+    public void setFDnpi(int FDnpi) {
+        this.FDnpi = FDnpi;
+    }
+
+    public double getFDsmax() {
+        return FDsmax;
+    }
+
+    public void setFDsmax(double FDsmax) {
+        this.FDsmax = FDsmax;
+    }
+
+    public int getBTnti() {
+        return BTnti;
+    }
+
+    public void setBTnti(int BTnti) {
+        this.BTnti = BTnti;
+    }
+
+    public int getSnti() {
+        return Snti;
+    }
+
+    public void setSnti(int Snti) {
+        this.Snti = Snti;
+    }
+
+    public int getSnt() {
+        return Snt;
+    }
+
+    public void setSnt(int Snt) {
+        this.Snt = Snt;
+    }
 
     /**
      * Constructor.
@@ -55,4 +115,6 @@ public class Option extends Product {
         this.right = right;
         this.style = style;
     }
+
+
 }

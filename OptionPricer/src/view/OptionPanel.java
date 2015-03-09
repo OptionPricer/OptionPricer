@@ -1,14 +1,13 @@
 package view;
 
 import controller.OPS;
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.ButtonGroup;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import model.OptionRight;
 import model.OptionStyle;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -68,7 +67,7 @@ public class OptionPanel extends JPanel implements ActionListener{
                         .addGap(80, 80, 80))))
         );
 
-        selectPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {callButton, putButton});
+        selectPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, callButton, putButton);
 
         selectPanelLayout.setVerticalGroup(
             selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

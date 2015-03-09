@@ -1,5 +1,7 @@
 package controller;
 
+import com.fathzer.soft.javaluator.DoubleEvaluator;
+import com.fathzer.soft.javaluator.StaticVariableSet;
 import model.*;
 
 import java.util.ArrayList;
@@ -9,6 +11,8 @@ import java.util.ArrayList;
  * The Controller class.
  */
 public class OPS {
+
+
     /**
      * An arraylist to store the names of algorithms chosen by the user.
      */
@@ -17,6 +21,13 @@ public class OPS {
      * An arraylist to store the algorithms chosen by the user.
      */
     public static ArrayList<Algorithm> algList;
+    /**
+     * An arraylist to store the names of drop-in algorithms.
+     */
+    public static ArrayList<String> customizedAlgNames;
+    /**
+     * An arraylist to store the algorithms chosen by the user.
+     */
     /**
      * An arraylist to store the calculation results.
      */
@@ -76,6 +87,34 @@ public class OPS {
 //         return appAlgs;
 //     }
 
+    /**
+     * A function to calculate the option price using the String-type formula that user enters.
+     * Adapted from the Javaluator v3.0
+     * @param expressions An arraylist of the String type formulas.
+     * @return An arraylist of the price.
+     */
+    public static ArrayList<Double> evalExpression(ArrayList<String> expressions){
+        DoubleEvaluator de=new DoubleEvaluator();
+        StaticVariableSet<Double> vars=new StaticVariableSet<>();
+        ArrayList<Double> results=new ArrayList<>();
+        double s = theOption.getsNought();
+        double k = theOption.getStrikeP();
+        double t = theOption.getTerm();
+        double o = theOption.getVolatility();
+        double r = theOption.getRiskFreeRate();
+        vars.set("s",s);
+        vars.set("k",k);
+        vars.set("t",t);
+        vars.set("o",o);
+        vars.set("r",r);
+        // Evaluate an expression
+        for(String exp:expressions){
+            results.add(de.evaluate(exp,vars));
+            //test
+            System.out.println(exp+" = "+de.evaluate(exp,vars));
+        }
+        return results;
+    }
     /**
      * A method to calculate option price using all the algorithms that user has chosen.
      */

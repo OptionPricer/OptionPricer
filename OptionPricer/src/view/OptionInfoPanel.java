@@ -1,9 +1,9 @@
 package view;
 
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import model.OptionRight;
 import model.OptionStyle;
+
+import javax.swing.*;
 
 /**
  * This class is used to show the information of which option and what the type

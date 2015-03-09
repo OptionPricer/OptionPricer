@@ -1,17 +1,11 @@
 package view;
 
 import controller.OPS;
-import java.awt.Container;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.WindowConstants;
-import model.Option;
 
 /**
  * This main frame is the basic container for all other sub frames.
@@ -22,58 +16,62 @@ import model.Option;
  * 
  */
 public class MainFrame extends JFrame{
-    private final String IMGPATH="../pictures/cmu_wordmark.jpg";
+    private final String IMGPATH = "../pictures/cmu_wordmark.jpg";
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel headLabel;
+    private javax.swing.JPanel headPanel;
+    
     public MainFrame(){
         setTitle("Option Pricer");
         this.setBackground(new java.awt.Color(150, 0, 0));
         setSize(1000, 700);
-        
+
         Container c = getContentPane();
-        
+
         initHeadPanel();
-        
-        //pack();  
-      
+
+        //pack();
+
         c.setLayout(new FlowLayout(1, 10, 10));
         c.add(headPanel);
         OptionPanel op = new OptionPanel(this);
-        c.add(op);              
-        
+        c.add(op);
+
 //        // main controll area
 //        OptionInfoPanel oip = new OptionInfoPanel("American Option", "CALL");
 //        c.add(oip);
 //        JButton backButton = new JButton();
 //        backButton.setText("");
 //        c.add(backButton);
-        
+
 //        ControllPanel cp = new ControllPanel();
 //        c.add(cp);
-        
+
         // result area
 //        OptionInfoPanel oip = new OptionInfoPanel("American Option", "CALL");
 //        c.add(oip);
 //        JButton backButton = new JButton();
 //        backButton.setText("");
 //        c.add(backButton);
-//        
+//
 //        ResultPanel rp = new ResultPanel();
 //        c.add(rp);
-                     
+
         setVisible(true);
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);    
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
     
     public MainFrame(String operation){
         setTitle("Option Pricer");
         this.setBackground(new java.awt.Color(150, 0, 0));
         setSize(1000, 700);
-        
-        Container c = getContentPane();      
+
+        Container c = getContentPane();
         initHeadPanel();
-      
+
         c.setLayout(new FlowLayout(1, 10, 10));
-        c.add(headPanel);             
-        
+        c.add(headPanel);
+
         if(operation.equals("CONTROL")){
             // main control area
             OptionInfoPanel oip = new OptionInfoPanel(OPS.theOption.getStyle(), OPS.theOption.getRight());
@@ -86,13 +84,13 @@ public class MainFrame extends JFrame{
                     new MainFrame();
                     tempmf.dispose();
                 }
-            });           
+            });
             c.add(backButton);
-            
+
             ControlPanel cp = new ControlPanel(this);
             c.add(cp);
         }
-        
+
         else if(operation.equals("RESULT")){
             // result area
             OptionInfoPanel oip = new OptionInfoPanel(OPS.theOption.getStyle(), OPS.theOption.getRight());
@@ -105,29 +103,35 @@ public class MainFrame extends JFrame{
                     new MainFrame();
                     tempmf.dispose();
                 }
-            });           
+            });
             c.add(backButton);
-            
+
             ResultPanel rp = new ResultPanel();
             c.add(rp);
         }
-   
+
         setVisible(true);
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);    
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
-    
+
+
+    public static void main(String[] args){
+        new MainFrame().setVisible(true);
+        }
+
+
     private void initHeadPanel(){
         headPanel = new javax.swing.JPanel();
         headLabel = new javax.swing.JLabel();
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        
+
         headPanel.setBackground(new java.awt.Color(150, 0, 0));
         headPanel.setMaximumSize(new java.awt.Dimension(1000, 100));
         headPanel.setMinimumSize(new java.awt.Dimension(1000, 100));
         headPanel.setPreferredSize(new java.awt.Dimension(1000, 100));
 
         headLabel.setBackground(new java.awt.Color(150, 0, 0));
-//        headLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(IMGPATH))); // NOI18N
+        headLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(IMGPATH))); // NOI18N
         headLabel.setMaximumSize(new java.awt.Dimension(150, 100));
         headLabel.setMinimumSize(new java.awt.Dimension(150, 100));
         headLabel.setPreferredSize(new java.awt.Dimension(150, 100));
@@ -149,14 +153,5 @@ public class MainFrame extends JFrame{
         );
 
     }
-    
-    public static void main(String[] args){
-        new MainFrame().setVisible(true);       
-    }
-    
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel headLabel;
-    private javax.swing.JPanel headPanel;
     // End of variables declaration//GEN-END:variables
 }
