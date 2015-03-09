@@ -5,5 +5,5 @@ package model;
  * Enum for model.Option style.
  */
 public enum  OptionStyle {
-    AMERICAN, ASIAN, EUROPEAN;
+    AMERICAN, ASIAN, EUROPEAN
 }

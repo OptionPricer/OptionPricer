@@ -5,5 +5,5 @@ package model;
  * Enum for option right.
  */
 public enum  OptionRight {
-    PUT,CALL;
+    PUT,CALL
 }

@@ -44,14 +44,15 @@ public class BinomialTree extends Algorithm {
             deltaT = option.getTerm() / numIntervals;
         }
 
-        public BinomialTree(){};
-        @Override
+        public BinomialTree(){}
+
+    @Override
         public double[] computeOption(Option option){
             System.out.println("Up prob: " + up);
             System.out.println("Down prob: " + down);
             System.out.println("TimeStep: " + deltaT);
-            int i;double volatility = option.getVolatility();;
-            if(option.getRight() == OptionRight.PUT){
+            int i;double volatility = option.getVolatility();
+        if(option.getRight() == OptionRight.PUT){
                 
                 for(i=0;i<=5;i++){
                     

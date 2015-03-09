@@ -1,16 +1,9 @@
 package view;
 
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-
 import controller.OPS;
-import model.Option;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * This class is used to show both the results and diagrams
@@ -59,13 +52,13 @@ public class ResultPanel extends JPanel{
         resultTable.setValueAt("Price",0,6);
 
         for (int i=1;i<=OPS.algList.size();i++) {
-            resultTable.setValueAt((String)OPS.algNames.get(i-1),i,0);
-            resultTable.setValueAt((double)OPS.theOption.getsNought(),i,1);
-            resultTable.setValueAt((double)OPS.theOption.getStrikeP(),i,2);
-            resultTable.setValueAt((double)OPS.theOption.getTerm(),i,3);
-            resultTable.setValueAt((double)OPS.theOption.getRiskFreeRate(),i,4);
-            resultTable.setValueAt((double)OPS.theOption.getVolatility(),i,5);
-            resultTable.setValueAt((double)OPS.results.get(i-1)[5],i,6);
+            resultTable.setValueAt(OPS.algNames.get(i-1),i,0);
+            resultTable.setValueAt(OPS.theOption.getsNought(),i,1);
+            resultTable.setValueAt(OPS.theOption.getStrikeP(),i,2);
+            resultTable.setValueAt(OPS.theOption.getTerm(),i,3);
+            resultTable.setValueAt(OPS.theOption.getRiskFreeRate(),i,4);
+            resultTable.setValueAt(OPS.theOption.getVolatility(),i,5);
+            resultTable.setValueAt(OPS.results.get(i-1)[5],i,6);
         }
         restartButton.setText("Restart");
         
